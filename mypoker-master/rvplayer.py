@@ -2,10 +2,25 @@ from pypokerengine.players import BasePokerPlayer
 
 class RVPlayer(BasePokerPlayer):
 
-    def declare_action(self, valid_actions, hole_card, round_state):
+	def __init__(self):
+		super(BasePokerPlayer, self).__init__()
+		f = open("handstr.txt")
+		cards = ["A"] + [str(i) for i in range(2, 10)] + ["T", "J", "Q", "K"]
+		print(cards)
+		for i in cards:
+			winrates[i] = {}
 
+		for i in f:
+			c1, c2, n = i.strip().split(" ")
+			winrates[c1][c2] = n
+			winrates[c2][c1] = n
+			
+    def declare_action(self, valid_actions, hole_card, round_state):
+	
         community_cards = round_state['community_card']
         street = round_state['street']  # current round
+		# winrate = winrates[hole_card[0][1]][hole_card[1][1]]
+		# print(winrate)
 
         call_action_info = self.action_based_on_hand(hole_card, community_cards, valid_actions)
 
