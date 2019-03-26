@@ -3,7 +3,7 @@ ai_players:
   path: rvplayer.py
 ante: 10
 blind_structure: null
-initial_stack: 100
+initial_stack: 1000
 max_round: 10
 small_blind: 10
 

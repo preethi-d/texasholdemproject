@@ -11,6 +11,7 @@ from argparse import ArgumentParser
 from randomplayer import RandomPlayer
 from rvplayer import RVPlayer
 from raise_player import RaisedPlayer
+from confirmloseplayer import ConfirmLosePlayer
 # from smartwarrior import SmartWarrior
 """ ========================================================= """
 
@@ -35,8 +36,8 @@ def testperf(agent_name1, agent1, agent_name2, agent2):
 	config = setup_config(max_round=max_round, initial_stack=initial_stack, small_blind_amount=smallblind_amount)
 	
 	# Register players
-	config.register_player(name=agent_name1, algorithm=agent1())
-	config.register_player(name=agent_name2, algorithm=agent2())
+	config.register_player(name=agent_name1, algorithm=RVPlayer())
+	config.register_player(name=agent_name2, algorithm=ConfirmLosePlayer())
 	# config.register_player(name=agent_name1, algorithm=agent1())
 	# config.register_player(name=agent_name2, algorithm=agent2())
 	
