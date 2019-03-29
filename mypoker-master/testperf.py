@@ -9,6 +9,9 @@ from argparse import ArgumentParser
 
 """ =========== *Remember to import your agent!!! =========== """
 from randomplayer import RandomPlayer
+from rvplayer import RVPlayer
+from raise_player import RaisedPlayer
+from confirmloseplayer import ConfirmLosePlayer
 # from smartwarrior import SmartWarrior
 """ ========================================================= """
 
@@ -20,7 +23,7 @@ $ python testperf.py -n1 "Random Warrior 1" -a1 RandomPlayer -n2 "Random Warrior
 def testperf(agent_name1, agent1, agent_name2, agent2):		
 
 	# Init to play 500 games of 1000 rounds
-	num_game = 500
+	num_game = 10
 	max_round = 1000
 	initial_stack = 10000
 	smallblind_amount = 20
@@ -33,18 +36,20 @@ def testperf(agent_name1, agent1, agent_name2, agent2):
 	config = setup_config(max_round=max_round, initial_stack=initial_stack, small_blind_amount=smallblind_amount)
 	
 	# Register players
-	config.register_player(name=agent_name1, algorithm=RandomPlayer())
-	config.register_player(name=agent_name2, algorithm=RandomPlayer())
+	config.register_player(name=agent_name1, algorithm=RVPlayer())
+	config.register_player(name=agent_name2, algorithm=ConfirmLosePlayer())
 	# config.register_player(name=agent_name1, algorithm=agent1())
 	# config.register_player(name=agent_name2, algorithm=agent2())
 	
 
 	# Start playing num_game games
 	for game in range(1, num_game+1):
-		print("Game number: ", game)
 		game_result = start_poker(config, verbose=0)
+		print("Game number: ", game, game_result['players'][0]['stack'], game_result['players'][1]['stack'])
 		agent1_pot = agent1_pot + game_result['players'][0]['stack']
 		agent2_pot = agent2_pot + game_result['players'][1]['stack']
+		# print("\n " + agent_name1 + "'s current pot: ", agent1_pot)
+		# print("\n " + agent_name2 + "'s current pot: ", agent2_pot)
 
 	print("\n After playing {} games of {} rounds, the results are: ".format(num_game, max_round))
 	# print("\n Agent 1's final pot: ", agent1_pot)
@@ -57,18 +62,21 @@ def testperf(agent_name1, agent1, agent_name2, agent2):
 
 	if (agent1_pot<agent2_pot):
 		print("\n Congratulations! " + agent_name2 + " has won.")
+		return 2
 	elif(agent1_pot>agent2_pot):
 		print("\n Congratulations! " + agent_name1 + " has won.")
+		return 1
 		# print("\n Random Player has won!")
 	else:
 		print("\n It's a draw!")
+		return 0
 
 
 def parse_arguments():
     parser = ArgumentParser()
-    parser.add_argument('-n1', '--agent_name1', help="Name of agent 1", default="Your agent", type=str)
+    parser.add_argument('-n1', '--agent_name1', help="Name of agent 1", default="Tested agent", type=str)
     parser.add_argument('-a1', '--agent1', help="Agent 1", default=RandomPlayer())    
-    parser.add_argument('-n2', '--agent_name2', help="Name of agent 2", default="Your agent", type=str)
+    parser.add_argument('-n2', '--agent_name2', help="Name of agent 2", default="Other agent", type=str)
     parser.add_argument('-a2', '--agent2', help="Agent 2", default=RandomPlayer())    
     args = parser.parse_args()
     return args.agent_name1, args.agent1, args.agent_name2, args.agent2
