@@ -17,7 +17,7 @@ class RandomPlayer(BasePokerPlayer):
     r = rand.random()
     if r <= 0.5:
       call_action_info = valid_actions[1]
-    elif r<= 0.9 and len(valid_actions ) == 3:
+    elif r<= 0.9 and len(valid_actions) == 3:
       call_action_info = valid_actions[2]
     else:
       call_action_info = valid_actions[0]
