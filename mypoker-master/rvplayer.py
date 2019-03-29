@@ -2,12 +2,37 @@ from pypokerengine.players import BasePokerPlayer
 
 class RVPlayer(BasePokerPlayer):
 
+    winrates = {}
+    def __init__(self, threshold = 0.5):
+        super(BasePokerPlayer, self).__init__()
+        f = open("hand_str_10000.txt")
+        cards = ["A"] + [str(i) for i in range(2, 10)] + ["T", "J", "Q", "K"]
+        # print(cards)
+        for i in cards:
+            self.winrates[i] = {}
+
+        for i in f:
+            c1, c2, n = i.strip().split(" ")
+            self.winrates[c1][c2] = n
+            self.winrates[c2][c1] = n
+
+        self.threshold = threshold
+
     def declare_action(self, valid_actions, hole_card, round_state):
 
         community_cards = round_state['community_card']
         street = round_state['street']  # current round
+        # print(hole_card[0][1],hole_card[1][1])
+        winrate = self.winrates[hole_card[0][1]][hole_card[1][1]]
+        # print(winrate)
 
-        call_action_info = self.action_based_on_hand(hole_card, community_cards, valid_actions)
+        # call_action_info = self.action_based_on_hand(hole_card, community_cards, valid_actions)
+
+        last_action = len(valid_actions) - 1
+        if float(winrate) > self.threshold:
+            call_action_info = valid_actions[last_action]
+        else:
+            call_action_info = valid_actions[0]
 
         action = call_action_info["action"]
         return action

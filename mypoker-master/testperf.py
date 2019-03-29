@@ -11,6 +11,7 @@ from argparse import ArgumentParser
 from randomplayer import RandomPlayer
 from rvplayer import RVPlayer
 from raise_player import RaisedPlayer
+from confirmloseplayer import ConfirmLosePlayer
 # from smartwarrior import SmartWarrior
 """ ========================================================= """
 
@@ -22,7 +23,7 @@ $ python testperf.py -n1 "Random Warrior 1" -a1 RandomPlayer -n2 "Random Warrior
 def testperf(agent_name1, agent1, agent_name2, agent2):		
 
 	# Init to play 500 games of 1000 rounds
-	num_game = 100
+	num_game = 10
 	max_round = 1000
 	initial_stack = 10000
 	smallblind_amount = 20
@@ -36,15 +37,15 @@ def testperf(agent_name1, agent1, agent_name2, agent2):
 	
 	# Register players
 	config.register_player(name=agent_name1, algorithm=RVPlayer())
-	config.register_player(name=agent_name2, algorithm=RandomPlayer())
+	config.register_player(name=agent_name2, algorithm=ConfirmLosePlayer())
 	# config.register_player(name=agent_name1, algorithm=agent1())
 	# config.register_player(name=agent_name2, algorithm=agent2())
 	
 
 	# Start playing num_game games
 	for game in range(1, num_game+1):
-		print("Game number: ", game)
 		game_result = start_poker(config, verbose=0)
+		print("Game number: ", game, game_result['players'][0]['stack'], game_result['players'][1]['stack'])
 		agent1_pot = agent1_pot + game_result['players'][0]['stack']
 		agent2_pot = agent2_pot + game_result['players'][1]['stack']
 		# print("\n " + agent_name1 + "'s current pot: ", agent1_pot)
@@ -61,11 +62,14 @@ def testperf(agent_name1, agent1, agent_name2, agent2):
 
 	if (agent1_pot<agent2_pot):
 		print("\n Congratulations! " + agent_name2 + " has won.")
+		return 2
 	elif(agent1_pot>agent2_pot):
 		print("\n Congratulations! " + agent_name1 + " has won.")
+		return 1
 		# print("\n Random Player has won!")
 	else:
 		print("\n It's a draw!")
+		return 0
 
 
 def parse_arguments():
