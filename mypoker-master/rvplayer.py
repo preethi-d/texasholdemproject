@@ -1,6 +1,7 @@
 from pypokerengine.players import BasePokerPlayer
 from pypokerengine.engine.hand_evaluator import HandEvaluator
 from pypokerengine.utils.card_utils import _fill_community_card, _pick_unused_card, gen_cards
+import datetime
 
 class RVPlayer(BasePokerPlayer):
 
@@ -143,8 +144,30 @@ class RVPlayer(BasePokerPlayer):
             else:
                 hp[index]['behind'] += (1 / num_simulation)  # normalize so that output of ppot and npot is from 0 to 1
 
+    def construct_ars(self, nb_player, num_simulation):
+        num_rows = 255
+        num_cols = 9
+        num_unique_starting_pair = 169
+        # create 3 ars tables, one for flop, one for turn, one for river
+        flop_table = [[[0 for k in range(num_unique_starting_pair)]for j in range(num_cols)]for i in range(num_rows)]
+        turn_table = [[[0 for k in range(num_unique_starting_pair)]for j in range(num_cols)]for i in range(num_rows)]
+        river_table = [[[0 for k in range(num_unique_starting_pair)]for j in range(num_cols)]for i in range(num_rows)]
+
+        # create a 52 x 52 table that maps each pair of starting hands to their unique ids
+        id_mapping_table = [[0 for k in range(52)]for j in range(52)]
+
+        # for each starting pair, calculate average hand strength with 3 faced up community cards for num_simulation
+        # times and enter into flop_table
+
+        # for each starting pair, calculate average hand strength with 4 faced up community cards for num_simulation
+        # times and enter into turn_table
+
+        # for each starting pair, calculate average hand strength with 5 faced up community cards for num_simulation
+        # times and enter into river_table
+
 
     def declare_action(self, valid_actions, hole_card, round_state):
+        before_action_dt = datetime.datetime.now()
         community_cards = round_state['community_card']
         winrate = self.winrates[hole_card[0][1]][hole_card[1][1]]
         # print(winrate)
@@ -158,7 +181,7 @@ class RVPlayer(BasePokerPlayer):
         pot_size = round_state['pot']['main']['amount']
         opp_play_style = self.get_opponent_play_style()
         # get hand potential with monte carlo simulation of 100 x 100 times
-        ppot, npot = self.get_hand_potential(hole_card, community_cards, 10)
+        ppot, npot = self.get_hand_potential(hole_card, community_cards, 30)
         eff_hand_str = hand_str + (1 - hand_str) * ppot
 
         # print("current street: " + current_street)
@@ -178,6 +201,10 @@ class RVPlayer(BasePokerPlayer):
             call_action_info = valid_actions[0]
 
         action = call_action_info["action"]
+        after_action_dt = datetime.datetime.now()
+
+        print("Time elapsed in seconds :" + (str)((after_action_dt - before_action_dt).total_seconds()))
+
         return action
 
     def action_based_on_hand(self, hole_card, community_cards, valid_actions):
