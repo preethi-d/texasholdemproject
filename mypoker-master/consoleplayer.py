@@ -3,6 +3,7 @@ from pypokerengine.players import BasePokerPlayer
 class ConsolePlayer(BasePokerPlayer):
     def declare_action(self, valid_actions, hole_card, round_state):
         print(valid_actions)
+        print(hole_card[0] + ", " + hole_card[1])
         inAction = input("Action: ")
 
         for i in valid_actions:
@@ -30,4 +31,4 @@ class ConsolePlayer(BasePokerPlayer):
 
 
 def setup_ai():
-    return RVPlayer()
+    return ConsolePlayer()
