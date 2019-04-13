@@ -57,13 +57,13 @@ class HandEvaluator:
   # Return Format
   # [Bit flg of hand][rank1(4bit)][rank2(4bit)]
   # ex.)
-  #       HighCard hole card 3,4   =>           100 0011
+  #       HighCard hole card 3,4   =>           100 0011 (bigger card in front, smaller card at back)
   #       OnePair of rank 3        =>        1 0011 0000
   #       TwoPair of rank A, 4     =>       10 1110 0100
   #       ThreeCard of rank 9      =>      100 1001 0000
   #       Straight of rank 10      =>     1000 1010 0000
   #       Flash of rank 5          =>    10000 0101 0000
-  #       FullHouse of rank 3, 4   =>   100000 0011 0100
+  #       FullHouse of rank 3, 4   =>   100000 0011 0100 (3 cards first, then 2 cards)
   #       FourCard of rank 2       =>  1000000 0010 0000
   #       straight flash of rank 7 => 10000000 0111 0000
   @classmethod
