@@ -5,22 +5,57 @@
 # train
 # update Q value
 #    calculate reward?
+
+from pypokerengine.api.game import setup_config, start_poker
+from consoleplayer import ConsolePlayer
 from rvplayer import RVPlayer
+from learningplayer import LearningPlayer
+from randomplayer import RandomPlayer
+
+
+def init():
+    print("hello world")
+    qtable = make_table()
+    config = setup_config(max_round=100, initial_stack=10000, small_blind_amount=10)
+
+    player = LearningPlayer()
+
+    config.register_player(name="rand", algorithm=RandomPlayer())
+    config.register_player(name="learn", algorithm=player)
+
+    game_result = start_poker(config, verbose=1)
+    for k in range(len(player.gameHistory)):
+        game = player.gameHistory[k]
+        print(("=" * 5 + " Game {} " + "=" * 5).format(k + 1))
+        for n in range(len(game['action_history'])):
+            i = game['action_history'][n]
+            print(("{:<10} {:<4} {:<2} {:<2} - {:<20} {:<5}").format(i['street'], i['pot'], i['hole_cards'][0], i['hole_cards'][1], " ".join(i['community_cards']), i['action']))
+        # print("\n".join(list(map(lambda p: "{}: {}".format(p['name'], p['stack']), game_result['players']))))
+        print(game['result']['name'], 'won pot of', game['pot'])
+        print("stack sizes: {} {}".format(game['self_stack'], game['opp_stack']))
+
 
 def make_table():
+    return {}
     pass
 
-def get_state(hs, ppot, npot, pot_size, opp_play_style, opp_num_raises, self_raises, current_street):
+
+def get_state(ehs, pot_size, opp_play_style, opp_num_raises, self_raises, current_street):
+    return ""
     pass
+
 
 def train(n):
     pass
 
+
 def train_round(epsilon):
     # set up emulator
     # run the thing
-    # 
+    # update weights
+
     pass
+
 
 def get_hand_strength(self, hole_card, community_card, num_simulation):
     if not community_card:
@@ -31,14 +66,16 @@ def get_hand_strength(self, hole_card, community_card, num_simulation):
     ahead_tied_behind = {'ahead': 0, 'tied': 0, 'behind': 0}
 
     # run monte carlo simulation for num_simulation times
-    [self.montecarlo_simulation_hs(2, hole_card, community_card, ahead_tied_behind, agent_rank) for _ in range(num_simulation)]
+    [self.montecarlo_simulation_hs(2, hole_card, community_card, ahead_tied_behind, agent_rank) for _ in
+     range(num_simulation)]
 
     ahead = ahead_tied_behind['ahead']
     tied = ahead_tied_behind['tied']
     behind = ahead_tied_behind['behind']
 
     # return hand strength based on (ahead + tied/2) / (ahead + tied + lose)
-    return (ahead + tied/2) / (ahead + tied + behind)
+    return (ahead + tied / 2) / (ahead + tied + behind)
+
 
 def get_hand_potential(self, hole_card, community_card, num_simulation):
     hole_card = gen_cards(hole_card)
@@ -84,6 +121,7 @@ def montecarlo_simulation_hs(self, nb_player, hole_card, community_card, ahead_t
         ahead_tied_behind['behind'] += 1
     # print(ahead_tied_behind)
 
+
 # montecarlo simulation for hand potential
 def montecarlo_simulation_hp(self, nb_player, hole_card, community_card, hp, total_hp, agent_rank, num_simulation):
     unused_cards = _pick_unused_card((nb_player - 1) * 2, hole_card + community_card)
@@ -111,3 +149,5 @@ def montecarlo_simulation_hp(self, nb_player, hole_card, community_card, hp, tot
             hp[index]['tied'] += (1 / num_simulation)  # normalize so that output of ppot and npot is from 0 to 1
         else:
             hp[index]['behind'] += (1 / num_simulation)  # normalize so that output of ppot and npot is from 0 to 1
+
+init()
