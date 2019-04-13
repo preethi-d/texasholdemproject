@@ -7,16 +7,14 @@
 #    calculate reward?
 
 from pypokerengine.api.game import setup_config, start_poker
-from consoleplayer import ConsolePlayer
-from rvplayer import RVPlayer
-from learningplayer import LearningPlayer
-from randomplayer import RandomPlayer
+from players.learningplayer import LearningPlayer
+from players.randomplayer import RandomPlayer
 
 
 def init():
     print("hello world")
     qtable = make_table()
-    config = setup_config(max_round=100, initial_stack=10000, small_blind_amount=10)
+    config = setup_config(max_round=10, initial_stack=10000, small_blind_amount=10)
 
     player = LearningPlayer()
 
@@ -29,7 +27,7 @@ def init():
         print(("=" * 5 + " Game {} " + "=" * 5).format(k + 1))
         for n in range(len(game['action_history'])):
             i = game['action_history'][n]
-            print(("{:<10} {:<4} {:<2} {:<2} - {:<20} {:<5}").format(i['street'], i['pot'], i['hole_cards'][0], i['hole_cards'][1], " ".join(i['community_cards']), i['action']))
+            print(("{:<10} {:<4} {:<2} {:<2} - {:<20} ({:<4}) {:<5} {}").format(i['street'], i['pot'], i['hole_cards'][0], i['hole_cards'][1], " ".join(i['community_cards']), i['ehs'], i['action'], i['valid_actions']))
         # print("\n".join(list(map(lambda p: "{}: {}".format(p['name'], p['stack']), game_result['players']))))
         print(game['result']['name'], 'won pot of', game['pot'])
         print("stack sizes: {} {}".format(game['self_stack'], game['opp_stack']))
