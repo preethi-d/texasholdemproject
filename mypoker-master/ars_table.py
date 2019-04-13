@@ -5,11 +5,13 @@ from pypokerengine.engine.hand_evaluator import HandEvaluator
 table_cards_to_mapping = {}
 ars_table = {}
 ars_table_final = {}
+ars_table_sorted = {}
 
 # create 3 ars tables, one for flop, one for turn, one for river
 def init_ars_table(street):
     ars_table[street] = {}
     ars_table_final[street] = {}
+    ars_table_sorted[street] = {}
 
 def generate_ars_table(street, num_simulation, num_simulation_hs):
     if street == 'flop':
@@ -32,35 +34,29 @@ def generate_ars_table(street, num_simulation, num_simulation_hs):
         if hand_rank not in ars_table[street]:
             ars_table[street][hand_rank] = {}
             ars_table_final[street][hand_rank] = {}
-
-        hole_card_id = get_hole_card_id(hole_card)  # get unique id for hole_card
-        if hole_card_id not in ars_table[street][hand_rank]:
-            ars_table[street][hand_rank][hole_card_id] = {}
-            ars_table[street][hand_rank][hole_card_id]["strength"] = 0
-            ars_table[street][hand_rank][hole_card_id]["total_iter"] = 0
-            ars_table_final[street][hand_rank][hole_card_id] = 0
+            ars_table[street][hand_rank]["strength"] = 0
+            ars_table[street][hand_rank]["total_iter"] = 0
+            ars_table_final[street][hand_rank] = 0
         # end initialization of table ----------------------------------------------------------
-
         strength = get_hand_strength(hole_card, community_card, num_simulation_hs)  # get hand strength
-        ars_table[street][hand_rank][hole_card_id]["strength"] += strength
-        ars_table[street][hand_rank][hole_card_id]["total_iter"] += 1
+        ars_table[street][hand_rank]["strength"] += strength
+        ars_table[street][hand_rank]["total_iter"] += 1
+
         if i % 1000 == 0:
             print(street + " round: " + str(i) + " simulation")
 
     # get average of all strengths and store it in ars_table_final
     for hand_rank_key in ars_table[street]:
-        for hole_card_id_key in ars_table[street][hand_rank_key]:
-            average_strength = ars_table[street][hand_rank_key][hole_card_id_key]["strength"] / \
-                               ars_table[street][hand_rank_key][hole_card_id_key]["total_iter"]
-            ars_table_final[street][hand_rank_key][hole_card_id_key] = round(average_strength, 3)  # 3 dec-place
+        average_strength = ars_table[street][hand_rank_key]["strength"] / \
+                           ars_table[street][hand_rank_key]["total_iter"]
+        ars_table_final[street][hand_rank_key] = round(average_strength, 3)  # 3 dec-place
 
 def write_ars_table_to_file(filename):
     file = open(filename, "w+")
-    for street_key in ars_table_final:
-        for hand_rank_key in ars_table_final[street_key]:
-            for hole_card_id_key in ars_table_final[street_key][hand_rank_key]:
-                file.write(street_key + " " + str(hand_rank_key) + " " + str(hole_card_id_key) + " "
-                                + str(ars_table_final[street_key][hand_rank_key][hole_card_id_key]) + "\n")
+    for street_key in ars_table_sorted:
+        for hand_rank_key in ars_table_sorted[street_key]:
+            file.write(street_key + " " + str(hand_rank_key) + " " +
+                       str(ars_table_sorted[street_key][hand_rank_key]) + "\n")
 
 def get_hand_strength(hole_card, community_card, num_simulation):
     if not community_card:
@@ -117,32 +113,31 @@ def generate_mapping_table():
     suits = ['H', 'S', 'D', 'C']
     count = 0
     # set unique id for flipped hole_cards or hole_cards with same rank but different suits
-    for card1 in cards:
-        for card2 in cards:
+    for card1 in range(len(cards)):
+        for card2 in range(card1, len(cards), 1):
             for suit1 in suits:
                 for suit2 in suits:
-                    table_cards_to_mapping[suit1 + card1][suit2 + card2] = count
-                    table_cards_to_mapping[suit2 + card2][suit1 + card1] = count
-        count += 1
+                    table_cards_to_mapping[suit1 + cards[card1]][suit2 + cards[card2]] = count
+                    table_cards_to_mapping[suit2 + cards[card2]][suit1 + cards[card1]] = count
+            count += 1
 
 # get the unique id that corresponds to the hole_card
 def get_hole_card_id(hole_card):
     return table_cards_to_mapping[hole_card[0].__str__()][hole_card[1].__str__()]
 
-print(sys.argv[1] + " round " + sys.argv[2] + " number of simulations for ARS and " + sys.argv[3] +
-      " number of simulations for MonteCarlo")
-init_mapping_table()
-generate_mapping_table()
+# print(sys.argv[1] + " round " + sys.argv[2] + " number of simulations for ARS and " + sys.argv[3] +
+#       " number of simulations for MonteCarlo")
+
+def get_ars_table_sorted(street):
+    print(sorted(ars_table_final[street]))
+    for score in sorted(ars_table_final[street]):
+        ars_table_sorted[street][score] = ars_table_final[street][score]
+        print(str(score) + " " + str(ars_table_sorted[street][score]))
+
+# init_mapping_table()
+# generate_mapping_table()
 init_ars_table(sys.argv[1])
 generate_ars_table(sys.argv[1], int(sys.argv[2]), int(sys.argv[3]))
-print(ars_table_final)
+get_ars_table_sorted(sys.argv[1])
+print(ars_table_sorted)
 write_ars_table_to_file(sys.argv[1] + "_" + sys.argv[2] + "_" + sys.argv[3] + ".txt")
-
-# for each starting pair, calculate average hand strength with 3 faced up community cards for num_simulation
-# times and enter into flop_table
-
-# for each starting pair, calculate average hand strength with 4 faced up community cards for num_simulation
-# times and enter into turn_table
-
-# for each starting pair, calculate average hand strength with 5 faced up community cards for num_simulation
-# times and enter into river_table
