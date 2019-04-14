@@ -100,6 +100,8 @@ def timeout2(seconds=None, defaultretval="Blah",exception_message="[EXP]: Action
     """
     def decorate(function):
 
+        return function
+
         if not seconds:
             return function
 

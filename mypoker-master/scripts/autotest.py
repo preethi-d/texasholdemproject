@@ -1,4 +1,4 @@
-from rvplayer import RVPlayer
+from players.rvplayer import RVPlayer
 import sys
 
 sys.path.insert(0, './pypokerengine/api/')
@@ -6,8 +6,6 @@ import game
 
 setup_config = game.setup_config
 start_poker = game.start_poker
-import time
-
 
 t1 = float(sys.argv[1]) or 0.4
 t2 = float(sys.argv[2]) or 0.5
