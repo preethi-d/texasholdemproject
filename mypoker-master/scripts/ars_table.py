@@ -221,12 +221,12 @@ if __name__ == '__main__':
                 main_table[street][score]['strength'] = table[score]['strength']
                 main_table[street][score]['total_iter'] = table[score]['total_iter']
 
-        for score in main_table[street]:
-            sorted_main_table[street][score] = {}
-            sorted_main_table[street][score] = round(
-                main_table[street][score]['strength'] / float(main_table[street][score]['total_iter']), 3)
+    for score in main_table[street]:
+        sorted_main_table[street][score] = {}
+        sorted_main_table[street][score] = round(
+            main_table[street][score]['strength'] / float(main_table[street][score]['total_iter']), 3)
 
-    write_ars_table_to_file('out.txt', sorted_main_table)
+    write_ars_table_to_file(street + "_" + str(num_total) + "_" + str(num_sim_hs) + '.txt', sorted_main_table)
     end_time = time.time()
     print("{} s".format(end_time - start_time))
 
