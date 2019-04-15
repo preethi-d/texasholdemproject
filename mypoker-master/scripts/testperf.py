@@ -8,10 +8,9 @@ from argparse import ArgumentParser
 
 
 """ =========== *Remember to import your agent!!! =========== """
-from randomplayer import RandomPlayer
-from rvplayer import RVPlayer
-from raise_player import RaisedPlayer
-from confirmloseplayer import ConfirmLosePlayer
+from players.randomplayer import RandomPlayer
+from players.rvplayer import RVPlayer
+from players.confirmloseplayer import ConfirmLosePlayer
 # from smartwarrior import SmartWarrior
 """ ========================================================= """
 
