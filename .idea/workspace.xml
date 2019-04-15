@@ -2,16 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="926c2823-a726-496a-aee1-b4a9af149f78" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mypoker-master/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/mypoker-master/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mypoker-master/hs_data/hand_str_10000.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/mypoker-master/players/learningplayer.py" beforeDir="false" afterPath="$PROJECT_DIR$/mypoker-master/players/learningplayer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mypoker-master/players/rvplayer.py" beforeDir="false" afterPath="$PROJECT_DIR$/mypoker-master/players/rvplayer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mypoker-master/qlearning.py" beforeDir="false" afterPath="$PROJECT_DIR$/mypoker-master/qlearning.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mypoker-master/scripts/flop_2500000_500.txt" beforeDir="false" afterPath="$PROJECT_DIR$/mypoker-master/hs_data/flop_2500000_500.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mypoker-master/scripts/river_2500000_200.txt" beforeDir="false" afterPath="$PROJECT_DIR$/mypoker-master/hs_data/river_2500000_500.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mypoker-master/scripts/turn_2500000_500.txt" beforeDir="false" afterPath="$PROJECT_DIR$/mypoker-master/hs_data/turn_2500000_500.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -24,16 +16,16 @@
     <SUITE FILE_PATH="coverage/texasholdemproject$randomplayer.coverage" NAME="randomplayer Coverage Results" MODIFIED="1552641922373" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/mypoker-master" />
     <SUITE FILE_PATH="coverage/texasholdemproject$checkpreflophandstrength.coverage" NAME="checkpreflophandstrength Coverage Results" MODIFIED="1552809564270" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/mypoker-master" />
     <SUITE FILE_PATH="coverage/texasholdemproject$ars_table.coverage" NAME="ars_table Coverage Results" MODIFIED="1555177346390" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/mypoker-master/scripts" />
-    <SUITE FILE_PATH="coverage/texasholdemproject$qlearning.coverage" NAME="qlearning Coverage Results" MODIFIED="1555317654485" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/mypoker-master" />
+    <SUITE FILE_PATH="coverage/texasholdemproject$qlearning.coverage" NAME="qlearning Coverage Results" MODIFIED="1555319528113" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/mypoker-master" />
     <SUITE FILE_PATH="coverage/texasholdemproject$testperf.coverage" NAME="testperf Coverage Results" MODIFIED="1553584562492" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/mypoker-master" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mypoker-master/qlearning.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="18" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="18" />
+            <state relative-caret-position="17">
+              <caret line="37" column="39" selection-start-line="37" selection-start-column="39" selection-end-line="37" selection-end-column="39" />
               <folding>
                 <element signature="e#93#153#0" expanded="true" />
               </folding>
@@ -41,27 +33,12 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/mypoker-master/.gitignore">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mypoker-master/q-table-100.txt">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mypoker-master/players/learningplayer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="365">
-              <caret line="79" column="51" lean-forward="true" selection-start-line="79" selection-start-column="51" selection-end-line="79" selection-end-column="51" />
+            <state relative-caret-position="270">
+              <caret line="192" column="37" selection-start-line="192" selection-start-column="37" selection-end-line="192" selection-end-column="37" />
               <folding>
-                <element signature="e#1732#1802#0" />
                 <element signature="e#2909#3445#0" />
                 <element signature="e#3327#3376#0" />
                 <element signature="e#3531#4290#0" />
@@ -70,7 +47,6 @@
                 <element signature="e#4957#5029#0" />
                 <element signature="e#5090#5156#0" />
                 <element signature="e#5183#5254#0" />
-                <element signature="e#5338#5848#0" />
                 <element signature="e#6175#6268#0" />
                 <element signature="e#6331#6381#0" />
                 <element signature="e#6485#6506#0" />
@@ -78,6 +54,24 @@
                 <element signature="e#7458#7490#0" />
                 <element signature="e#9748#9771#0" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mypoker-master/q-table-100.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="17">
+              <caret line="1" column="51" lean-forward="true" selection-start-line="1" selection-start-column="32" selection-end-line="1" selection-end-column="51" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mypoker-master/q-table-140.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="17">
+              <caret line="1" column="31" selection-start-line="1" selection-start-column="31" selection-end-line="1" selection-end-column="49" />
             </state>
           </provider>
         </entry>
@@ -92,45 +86,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mypoker-master/hs_data/flop_2500000_500.txt">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mypoker-master/pypokerengine/api/game.py">
+        <entry file="file://$PROJECT_DIR$/mypoker-master/hs_data/river_2500000_500.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="782">
-              <caret line="46" column="46" selection-start-line="46" selection-start-column="46" selection-end-line="46" selection-end-column="46" />
-              <folding>
-                <element signature="e#0#46#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" selection-start-line="3" selection-end-line="3" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mypoker-master/scripts/ars_table.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="78" column="28" selection-start-line="78" selection-start-column="28" selection-end-line="78" selection-end-column="28" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mypoker-master/scripts/out.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="455">
-              <caret line="426" selection-start-line="426" selection-end-line="426" />
+            <state relative-caret-position="392">
+              <caret line="17469" column="11" lean-forward="true" selection-start-line="17469" selection-start-column="11" selection-end-line="17469" selection-end-column="11" />
             </state>
           </provider>
         </entry>
@@ -154,6 +113,8 @@
       <find>dump</find>
       <find>update_tab</find>
       <find>60138</find>
+      <find>fold</find>
+      <find>num_rounds_played</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -189,9 +150,9 @@
         <option value="$PROJECT_DIR$/mypoker-master/pypokerengine/engine/hand_evaluator.py" />
         <option value="$PROJECT_DIR$/mypoker-master/scripts/ars_table.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/mypoker-master/.gitignore" />
         <option value="$PROJECT_DIR$/mypoker-master/players/learningplayer.py" />
         <option value="$PROJECT_DIR$/mypoker-master/qlearning.py" />
-        <option value="$PROJECT_DIR$/mypoker-master/.gitignore" />
       </list>
     </option>
   </component>
@@ -405,7 +366,7 @@
       <workItem from="1553340516376" duration="1100000" />
       <workItem from="1553573476259" duration="6782000" />
       <workItem from="1555139430486" duration="4728000" />
-      <workItem from="1555208114050" duration="5903000" />
+      <workItem from="1555208114050" duration="7571000" />
     </task>
     <task id="LOCAL-00001" summary="Add new basic rv player">
       <created>1552800973400</created>
@@ -418,18 +379,18 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="60973000" />
+    <option name="totallyTimeSpent" value="62641000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="878" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23959732" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23959732" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3297587" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.21983914" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.34986594" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.43699732" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -448,12 +409,12 @@
       <window_info anchor="right" x="0" y="0" width="337" height="678" id="Documentation" order="5" side_tool="true" weight="0.3295302" />
     </layout>
     <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.23959732" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23959732" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3297587" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.21983914" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.34986594" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.43699732" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -498,17 +459,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/mypoker-master/hand_str_10000.txt" />
-    <entry file="file://$PROJECT_DIR$/mypoker-master/pypokerengine/utils/card_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="28" column="40" selection-start-line="28" selection-start-column="40" selection-end-line="28" selection-end-column="40" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mypoker-master/raise_player.py" />
     <entry file="file://$PROJECT_DIR$/mypoker-master/pypokerengine/engine/player.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -575,23 +525,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mypoker-master/pypokerengine/engine/data_encoder.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="445">
-          <caret line="47" column="29" selection-start-line="47" selection-start-column="11" selection-end-line="47" selection-end-column="29" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mypoker-master/pypokerengine/engine/dealer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="48" selection-start-line="48" selection-end-line="48" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mypoker-master/poker_player_wrapper.py" />
     <entry file="file://$PROJECT_DIR$/mypoker-master/poker_player.py" />
     <entry file="file://$PROJECT_DIR$/mypoker-master/pypokerengine/engine/card.py">
@@ -613,16 +546,6 @@
           <caret line="36" column="37" selection-start-line="36" selection-start-column="37" selection-end-line="36" selection-end-column="37" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mypoker-master/pypokerengine/engine/message_builder.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="664">
-          <caret line="52" column="28" selection-start-line="52" selection-start-column="28" selection-end-line="52" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#57#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -735,16 +658,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mypoker-master/pypokerengine/api/game.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="782">
-          <caret line="46" column="46" selection-start-line="46" selection-start-column="46" selection-end-line="46" selection-end-column="46" />
-          <folding>
-            <element signature="e#0#46#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mypoker-master/scripts/out.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="455">
@@ -752,8 +665,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/mypoker-master/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="13" lean-forward="true" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/mypoker-master/hs_data/flop_2500000_500.txt">
-      <provider selected="true" editor-type-id="text-editor" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-86903" />
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mypoker-master/q-table-5.txt">
       <provider selected="true" editor-type-id="text-editor">
@@ -763,14 +685,68 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mypoker-master/q-table-100.txt">
-      <provider selected="true" editor-type-id="text-editor" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="51" lean-forward="true" selection-start-line="1" selection-start-column="32" selection-end-line="1" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mypoker-master/q-table-140.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="31" selection-start-line="1" selection-start-column="31" selection-end-line="1" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mypoker-master/pypokerengine/engine/data_encoder.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="41" column="6" selection-start-line="41" selection-start-column="6" selection-end-line="41" selection-end-column="6" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mypoker-master/pypokerengine/engine/message_builder.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="83" column="54" lean-forward="true" selection-start-line="83" selection-start-column="54" selection-end-line="83" selection-end-column="54" />
+          <folding>
+            <element signature="e#0#57#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mypoker-master/pypokerengine/engine/dealer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="179">
+          <caret line="146" column="56" lean-forward="true" selection-start-line="146" selection-start-column="56" selection-end-line="146" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mypoker-master/pypokerengine/api/game.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="145">
+          <caret line="15" column="32" lean-forward="true" selection-start-line="15" selection-start-column="32" selection-end-line="15" selection-end-column="32" />
+          <folding>
+            <element signature="e#0#46#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mypoker-master/hs_data/river_2500000_500.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="392">
+          <caret line="17469" column="11" lean-forward="true" selection-start-line="17469" selection-start-column="11" selection-end-line="17469" selection-end-column="11" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mypoker-master/players/learningplayer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="365">
-          <caret line="79" column="51" lean-forward="true" selection-start-line="79" selection-start-column="51" selection-end-line="79" selection-end-column="51" />
+        <state relative-caret-position="270">
+          <caret line="192" column="37" selection-start-line="192" selection-start-column="37" selection-end-line="192" selection-end-column="37" />
           <folding>
-            <element signature="e#1732#1802#0" />
             <element signature="e#2909#3445#0" />
             <element signature="e#3327#3376#0" />
             <element signature="e#3531#4290#0" />
@@ -779,7 +755,6 @@
             <element signature="e#4957#5029#0" />
             <element signature="e#5090#5156#0" />
             <element signature="e#5183#5254#0" />
-            <element signature="e#5338#5848#0" />
             <element signature="e#6175#6268#0" />
             <element signature="e#6331#6381#0" />
             <element signature="e#6485#6506#0" />
@@ -792,18 +767,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mypoker-master/qlearning.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="18" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="18" />
+        <state relative-caret-position="17">
+          <caret line="37" column="39" selection-start-line="37" selection-start-column="39" selection-end-line="37" selection-end-column="39" />
           <folding>
             <element signature="e#93#153#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mypoker-master/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
         </state>
       </provider>
     </entry>
