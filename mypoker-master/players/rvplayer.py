@@ -15,7 +15,7 @@ class RVPlayer(BasePokerPlayer):
 
     def __init__(self, threshold = 0.5):
         super(BasePokerPlayer, self).__init__()
-        f = open("hand_str_10000.txt")
+        f = open("preflop_10000.txt")
         cards = ["A"] + [str(i) for i in range(2, 10)] + ["T", "J", "Q", "K"]
         # print(cards)
         for i in cards:
