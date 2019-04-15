@@ -50,7 +50,7 @@
 % page charge instructions.
 % Put where the files are available in the appropriate places.
 
-\title{Poker Project - Team \#07}
+\title{Poker Project - Team 07}
 
 
 % Multiple author syntax (remove the single-author syntax above and the \iffalse ... \fi here)
@@ -75,19 +75,19 @@ chungming.tsen@u.nus.edu, e0203237@u.nus.edu, jamespang@nus.edu.sg, lywjoel@u.nu
 
 The game of poker has long been a field of interest for artificial intelligence (AI) researchers. This is not surprising as developing an AI poker agent capable of competing with humans at the highest level is challenging, given that poker is a game that forces players to make decisions with incomplete and imperfect information. This paper talks about the steps we took in designing an AI Poker Player agent in Heads Up Limit Texas Hold'em. An agent subjected to reinforcement learning must learn to interact with the environment in order to maximize its reward. Reinforcement learning was chosen as a way to get the best possible action based on the current state.
 
-The problem with Limit Texas Hold'em is that there is no input or output training data sets available for the agent to gather feedback from. Hence, the only way an agent can learn is by trial and error based on feedback from its own actions and experiences. A reward function where actions that led to positive outcomes are rewarded, and actions that led to negative outcomes are punished is created, with the goal of maximizing its reward. The design of a reward function good enough for the agent to master poker is the basis for this project. In a game of poker, the agent does not have a complete model of the environment, nor does it know the states that its actions will lead to. Thus, a Q-learning agent, which compares the expected utilities of the remaining choices without the need to know the outcomes nor the model of the environment~\cite{russell-norvig:Modern}, is our agent design of choice as it fits the scenario of a poker game.
+The problem with Limit Texas Hold'em is that there is no input or output training data sets available for the agent to gather feedback from. Hence, the only way an agent can learn is by trial and error based on feedback from its own actions and experiences. A reward function where actions that led to positive outcomes are rewarded, and actions that led to negative outcomes are penalized is created, with the goal of maximizing its reward. The design of a reward function good enough for the agent to master poker is the basis for this project. In a game of poker, the agent does not have a complete model of the environment, nor does it know the states that its actions will lead to. Thus, a Q-learning agent, which compares the expected utilities of the remaining choices without the need to know the outcomes nor the model of the environment~\cite{russell-norvig:Modern}, is our agent design of choice as it fits the scenario of a poker game.
 
 \section{Pre-Flop Hand Strength}
 
 To begin with, we wanted to decide how the agent will determine the strength of its hand, just from the pre-flop round. Due to the limited amount of information that we can manipulate during the pre-flop round, the strength of a hand, $HS$, at pre-flop is determined by the probability of winning, $Pr(Win)$, based on the prior knowledge of the two hole cards currently in hand. 
 
-To estimate $HS$, we simulated 10,000 games for each possible combination of starting hand. The total combination of starting hands is  13 + ${13 \choose 2}$ = 91, obtained by summing up the combination of pocket pairs and the combination of unsuited hands. For each game, we first pick the two starting cards for the agent, followed by randomly picking two starting cards for the opponent and three community cards. Both players' hands are then revealed and the game result determined as a win or a loss for the agent.
+To estimate $HS$, we simulated 10,000 games for each possible combination of starting hand. The total combination of starting hands is  13 + ${13 \choose 2}$ = 91, obtained by summing up the combination of pocket pairs and the combination of unsuited hands. For each game, we first pick the two starting cards for the agent, followed by randomly picking two starting cards for the opponent and five community cards. Both players' hands are then revealed and the game result determined as a win or a loss for the agent.
 
 We then calculate $Pr(Win)$ using the formula:
 \begin{displaymath}
 Pr(Win)= \frac{\# \text{ } of \text{ } wins}{Total \text{ }games \text{ } played}
 \end{displaymath}
-Where the total games played is fixed at 10,000 in our case. The results of our simulation is as seen in Figure \ref{fig:1}.
+Where the total games played is fixed at 10,000 in our case. The results of our simulation are seen in Figure \ref{fig:1}.
 \begin{figure}
   \includegraphics[width=\linewidth]{WinningProb.PNG}
   \caption{Estimated winning probabilities with starting hands}
@@ -112,7 +112,7 @@ Where $j$ and $k$ are pre-determined thresholds set for the agent.
 
 In subsequent post-flop rounds, reinforcement learning is employed. Specifically, the technique of Q-learning, which was described in the Introduction, was used to train our agent.
 
-In Q-learning, we maintain a table of states and actions as inputs for the agent. Each permutation generates an expected reward. An illustration of it can be seen in Table 1.
+In Q-learning, we maintain a table of states and actions as inputs for the agent. Each state has a Q-value that corresponds to each action. An illustration of it can be seen in Table 1.
 
 \begin{table}[h!]
   \begin{center}
@@ -133,11 +133,11 @@ In Q-learning, we maintain a table of states and actions as inputs for the agent
     \label{tab:table1}
   \end{center}
 \end{table}
-After each training round, the state of each permutation is updated based on the formula
+After each training round, the Q-value of each state is updated based on the formula given below:
 \begin{displaymath}
 Q\left(s',a'\right)=Q\left(s,a\right)+\sum_{0}^{t}\lambda^{t}R_t\left(s,a\right)
 \end{displaymath}
-Where $t$ is the number of turns between the move and the terminal node, $R_t$ is the reward for round $t$, and $\lambda$ is the discount factor.
+Where $t$ is the number of turns between the move and the terminal node, $R_t$ is the reward for round $t$, $\lambda$ is the discount factor, $s$ is the state and $a$ is the action.
 
 \begin{displaymath}
   R_t=
@@ -153,20 +153,19 @@ Where $t$ is the number of turns between the move and the terminal node, $R_t$ i
   \lambda=\text{discount rate for future reward}
 \end{displaymath}
 
-We also apply the technique of experience replay to achieve more efficient use of previous experience. We store the agent's experiences based on the formula
+Additionally, we applied the technique of experience replay to achieve more efficient use of previous experiences. We store the agent's experiences based on the formula
 \begin{displaymath}
-e_t=\left(s_t,a_t,r_t,s_(t+1)\right)
+e_t=\left(s_t,a_t,R_t,s_{t+1}\right)
 \end{displaymath}
-Where $s_t$ refers to the state at turn $t$, $a_t$ refers to the action taken at turn $t$, and $r_t$ refers to the reward at turn $t$.
-The agent stores the data discovered for each turn in a table, and reinforcement learning takes place based on random sampling from the table. This reduces the amount of experience required to learn, replacing it with more computation and memory which are cheaper resources than the agent's continuous interactions with the environment. [Schaul, 2016]
+The agent stores the data discovered for each round in a table, and reinforcement learning takes place based on random sampling from the table. This reduces the amount of experience required to learn, replacing it with more computation and memory which are cheaper resources than the agent's continuous interactions with the environment~\cite{sqas:replay}.
 
 \section{$\epsilon$-Greedy Algorithm}
 
 At every turn, with a probability of $\epsilon$, a random action is chosen to be performed, otherwise an action with the best expected reward is chosen.
 
-The value of $\epsilon$ will slowly decrease as the agent acquires more training. A relatively large initial value ensures that all possible paths will be explored before the agent settles into a sub-optimal pattern. The $State$ and $Action$ for the $\epsilon$-Greedy Algorithm is
+The value of $\epsilon$ will slowly decrease as the agent acquires more training. A relatively large initial value ensures that all possible paths will be explored before the agent settles into a sub-optimal pattern. The $i$-th $State$ and $Action$ for the $\epsilon$-Greedy Algorithm is
 \begin{displaymath}
-State = \{ HS\text{, }ARS\text{, }S\text{, }P\text{, }\#OR\text{, }\#SR\text{, }OPS\}
+State_i = \{ EHS_i \text{, } S_i \text{, }P_i\text{, }\#OR_i\text{, }\#SR_i\text{, }OPS_i\}
 \end{displaymath}
 \begin{displaymath}
 Actions = \{ fold\text{, }call\text{, }raise \}
@@ -174,20 +173,19 @@ Actions = \{ fold\text{, }call\text{, }raise \}
 Where
 
 \begin{description}[style=multiline,leftmargin=10mm]
-\item [\emph{HS}]refers to the current Hand Strength of a given player. More details can be found in Section 4.1.
-\item [\emph{ARS}]refers to the current Average Rank Strength of a given player. More details can be found in Section 4.2.
-\item [\emph{S}]refers to the current Street that the game is in. More details can be found in Section 4.3.
-\item [\emph{P}]refers to the Pot. More details can be found in Section 4.4.
-\item [\emph{\#OR}]refers to the Opponent's Raise. More details can be found in Section 4.5.
-\item [\emph{\#SR}]refers to the agent's Self Raise. More details can be found in Section 4.6.
-\item [\emph{OPS}]refers to the Opponent Playing Style. More details can be found in Section 4.7.
+\item [\emph{EHS}]refers to the current Expected Hand Strength of a given player. $EHS$ is grouped in increments of 0.01. More details can be found in Section 4.1.
+\item [\emph{S}]refers to the current Street that the game is in, which is the start of each new round. $S$ three groups that are evaluated are Flop, Turn and River.
+\item [\emph{P}]refers to the Pot Size, which is the total amount in the player's bet. $P$ is grouped by the number of big blinds.
+\item [\emph{\#OR}]refers to the number of Opponent Raises per street. $OR$ is grouped into nine different groups, i.e. from 0 to 8.
+\item [\emph{\#SR}]refers to the number of Self Raises per street. $SR$ is grouped into nine different groups, i.e. from 0 to 8.
+\item [\emph{OPS}]refers to the Opponent Playing Style. $OPS$ is grouped into four categories. More details can be found in Section 4.3
 \end{description}
+
+Based on the groupings, the total size of the state space will be 
 
 \subsection{Expected Hand Strength}
 
-The Expected Hand Strength, $EHS$ is the probability of the current hand of a given player winning if the game reaches a showdown. It factors in all possible combinations of the opponents' hands, the remaining hidden board cards, and performing a comparison between the agent's hand and the hands in the enumeration to see which is better. The quality of the hand is then measured based on the number of times the hand turns out to be better. For our $\epsilon$-Greedy Algorithm, the $EHS$ is grouped in increments of 0.01. 
-
-Given $n$ number of opponents, the remaining cards, $Rem$ is given by:
+The Expected Hand Strength, $EHS$ is the probability of the current hand of a given player winning if the game reaches a showdown. It factors in all possible combinations of the opponents' hands, the remaining hidden board cards, and performing a comparison between the agent's hand and the hands in the enumeration to see which is better. The quality of the hand is then measured based on the number of times the hand turns out to be better. For our $\epsilon$-Greedy Algorithm, the $EHS$ is grouped in increments of 0.01. The remaining cards, $Rem$ is given by:
 \begin{displaymath}
   Rem = \left[ \alpha \char`\\ \beta \right]^{5}
 \end{displaymath}
@@ -211,7 +209,7 @@ Thus, the $EHS$ for player $h$ against 1 opponent is given by:
   EHS(h)= \frac{Ahead(h)+\frac{Tied(h)}{2}}{Ahead(h) + Tied(h) + Behind(h)}
 \end{displaymath}
 
-\noindent The above formulas used to derive the $EHS$ was referenced from Teofilo \textit{et al.}~\shortcite{trc:hs}. Note that the $EHS$ may be used at any round of the game. However, the number of iterations needed to compute the $EHS$ for a single hand at the pre-flop street is very high. This issue is addressed in the next section using the Average Rank Strength technique.
+\noindent The above formulas used to derive the $EHS$ was referenced from Teofilo \textit{et al.}~\shortcite{trc:hs}. Note that the $EHS$ may be used at any round of the game. However, computing an accurate $EHS$ would exceed the time constraint for each round as the number of iterations needed to compute it for a single hand at the pre-flop street is very high. This issue is addressed by using the Average Rank Strength technique which is explained in the next section.
 
 \subsection{Average Rank Strength}
 
@@ -223,16 +221,16 @@ Where $X_i$ is a distinct subset of size 5 of the deck except the pocket cards.
 
 Thus, compared to $EHS$, $ARS$ had a three orders of magnitude faster response time when querying the lookup table, while also doing so with negligible error~\cite{trc:ars}.
 
-To find out the estimated $EHS$ for the three post-flop streets, we simulated 500,000 rounds each. Additionally, for each round of simulation, we ran the Monte Carlo sampling algorithm to obtain the $EHS$. The results are displayed below:
+To find out the estimated $EHS$ for the three post-flop streets, we simulated 2,500,000 rounds each. Additionally, for each round of simulation, we ran the Monte Carlo sampling algorithm 500 times to obtain the $EHS$. The results are displayed below:
 
 \begin{table}[h!]
   \begin{center}
     \begin{tabular}{l|c}
       \textbf{Street} & \textbf{Number of Combinations} \\
       \hline
-      Flop & 4569 \\
-      Turn & 9452 \\
-      River & 13987 \\
+      Flop & 5133 \\
+      Turn & 13,408 \\
+      River & 17,470 \\
     \end{tabular}
     \caption{Result of $ARS$ Simulation}
     \label{tab:table2}
@@ -241,21 +239,7 @@ To find out the estimated $EHS$ for the three post-flop streets, we simulated 50
 
 \noindent Our reasoning behind such a high number of simulation is. so that we can sample as many combinations as possible. And in doing so, achieve a more accurate estimate.
 
-\subsection{Street}
-
-Street, $S$, refers to the start of each new round. For our $\epsilon$-Greedy Algorithm, we only evaluate the three Post-Flop streets, i.e. Flop, Turn and River. 
-
-\subsection{Pot}
-
-Pot, $P$, refers to the total amount in the player's bet. For our $\epsilon$-Greedy Algorithm, $P$ is grouped by the number of big blinds.
-
-\subsection{Opponent Raise}
-
-Opponent Raise, $OR$, refers to the number of raises by the opponent per street. For our $\epsilon$-Greedy Algorithm, $OR$ is grouped into nine different groups, i.e. from 0 to 8.
-
-\subsection{Self Raise}
-
-Self Raise, $SR$, refers to the number of raises by the agent per street. For our $\epsilon$-Greedy Algorithm, $SR$ is grouped into nine different groups, i.e. from 0 to 8.
+Based on the results from simulating 100,000 rounds, approximately 0.13\% of the scores could not be found in our table. This goes to show that our three $ARS$ tables are highly reliable.
 
 \subsection{Opponent Playing Styles}
 
@@ -280,18 +264,27 @@ According to Rupeneite~\shortcite{rupeneite:Reinforcement}, the playing style of
     \label{tab:table3}
   \end{center}
 \end{table}
-
-The Aggressive Factor, $AF$, is used to classify a player as either aggressive or passive. The formula for $AF$ is as follows:
+The Aggressive Factor, $AF$, is used to classify a player as either Aggressive or Passive. The formula for $AF$ is as follows:
 \begin{displaymath}
   AF = \frac{\text{\# }raises}{\text{\# }calls}
 \end{displaymath}
+\noindent Players can be classified into either Aggressive or Passive by the percentage of games they have played. Based on research by Rupeneite~\shortcite{rupeneite:Reinforcement}, a threshold of 1 is used:
+\begin{itemize}
+	\item Aggressive if $AF > 1$
+	\item Passive if $AF \leq 1$
+\end{itemize}
 
-The Player Tightness, $PT$, is used to classify a player as either tight or loose. Based on research by Rupeneite~\shortcite{rupeneite:Reinforcement}, a threshold of 0.28 is used. The formula for $PT$ is as follows:
+The Player Tightness, $PT$, is used to classify a player as either Loose or Tight. The formula for $PT$ is as follows:
 \begin{displaymath}
   PT =  \frac{\text{\# }folds}{\text{\# }games} 
 \end{displaymath}
- 
-Later, a classification process is conducted to classify the opponent's style of play into four categories, as seen in Table 4.
+\noindent Players can be classified into either Loose or Tight by the percentage of games they have played. Based on research by Rupeneite~\shortcite{rupeneite:Reinforcement}, a threshold of 0.28 is used:
+\begin{itemize}
+	\item Tight if $PT < 0.28$ hands
+	\item Loose if $PT \geq 0.28$ hands
+\end{itemize}
+
+Later, a classification process, introduced by Dinis and Reis~\shortcite{dinis-reis:modeling}, is conducted to classify the opponent's style of play into four categories, as seen in Table 4.
 
 \begin{table}[h!]
   \begin{center}
@@ -365,7 +358,6 @@ To calculate $EHS$, we set $NPot=0$ since we want the probability of the hand be
 \begin{displaymath}
   EHS = HS +(1-HS) * PPot
 \end{displaymath}
-\fi
 
 \subsection{Word Processing Software}
 
@@ -485,24 +477,16 @@ list should not include unpublished work~\cite{trc:hs}.
 Citations within the text should include the author's last name and
 the year of publication, for example~\cite{trc:ars}.  Append
 lowercase letters to the year in cases of ambiguity.  Treat multiple
-authors as in the following examples:~\cite{abelson-et-al:scheme}
-or~\cite{bgf:Lixto} (for more than two authors) and
-\cite{brachman-schmolze:kl-one} (for two authors).  If the author
+authors as in the following examples:
+or (for more than two authors) and (for two authors).  If the author
 portion of a citation is obvious, omit it, e.g.,
-Nebel~\shortcite{nebel:jair-2000}.  Collapse multiple citations as
-follows:~\cite{gls:hypertrees,levesque:functional-foundations}.
-\nocite{abelson-et-al:scheme}
-\nocite{bgf:Lixto}
-\nocite{brachman-schmolze:kl-one}
-\nocite{gottlob:nonmon}
-\nocite{gls:hypertrees}
-\nocite{levesque:functional-foundations}
-\nocite{levesque:belief}
-\nocite{nebel:jair-2000}
-\nocite{trc:ars}
-\nocite{trc:hs}
-\nocite{rupeneite:Reinforcement}
-\nocite{russell-norvig:Modern}
+Nebel.  Collapse multiple citations as
+follows:
+~\cite{trc:ars}
+~\cite{trc:hs}
+~\cite{rupeneite:Reinforcement}
+~\cite{russell-norvig:Modern}
+~\cite{sqas:replay}
 
 \subsection{Footnotes}
 
@@ -531,6 +515,7 @@ form: Figure 1, Table 2, etc. Place illustration numbers and captions
 under illustrations. Leave a margin of 1/4-inch around the area
 covered by the illustration and caption.  Use 9-point type for
 captions, labels, and other text in illustrations.
+\fi
 
 \section*{Acknowledgments}
 
@@ -538,6 +523,7 @@ The preparation of this report would not have been possible without the help of 
 
 \appendix
 
+\iffalse
 \section{\LaTeX{} and Word Style Files}\label{stylefiles}
 
 The \LaTeX{} and Word style files are available on the IJCAI--18
@@ -558,7 +544,7 @@ IJCAI--07.
 
 These Microsoft Word and \LaTeX{} files contain the source of the
 present document and may serve as a formatting sample.  
-
+\fi
 
 %% The file named.bst is a bibliography style file for BibTeX 0.99c
 \bibliographystyle{named}
