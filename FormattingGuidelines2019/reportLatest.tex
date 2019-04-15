@@ -81,7 +81,9 @@ The problem with Limit Texas Hold'em is that there is no input or output trainin
 
 To begin with, we wanted to decide how the agent will determine the strength of its hand, just from the pre-flop round. Due to the limited amount of information that we can manipulate during the pre-flop round, the strength of a hand, $HS$, at pre-flop is determined by the probability of winning, $Pr(Win)$, based on the prior knowledge of the two hole cards currently in hand. 
 
-To estimate $HS$, we simulated 10,000 games for each possible combination of starting hand. The total combination of starting hands is  13 + ${13 \choose 2}$ = 91, obtained by summing up the combination of pocket pairs and the combination of unsuited hands. We then calculate $Pr(Win)$ using the formula:
+To estimate $HS$, we simulated 10,000 games for each possible combination of starting hand. The total combination of starting hands is  13 + ${13 \choose 2}$ = 91, obtained by summing up the combination of pocket pairs and the combination of unsuited hands. For each game, we first pick the two starting cards for the agent, followed by randomly picking two starting cards for the opponent and three community cards. Both players' hands are then revealed and the game result determined as a win or a loss for the agent.
+
+We then calculate $Pr(Win)$ using the formula:
 \begin{displaymath}
 Pr(Win)= \frac{\# \text{ } of \text{ } wins}{Total \text{ }games \text{ } played}
 \end{displaymath}
@@ -104,6 +106,7 @@ At every pre-flop street, the agent chooses an action to be performed based on t
   \end{array}
   \right\rbrace \quad \text{where } 0 < j < k \leq 1
 \end{displaymath}
+Where $j$ and $k$ are pre-determined thresholds set for the agent.
 
 \section{Post-Flop Rounds}
 
@@ -149,6 +152,13 @@ Where $t$ is the number of turns between the move and the terminal node, $R_t$ i
 \begin{displaymath}
   \lambda=\text{discount rate for future reward}
 \end{displaymath}
+
+We also apply the technique of experience replay to achieve more efficient use of previous experience. We store the agent's experiences based on the formula
+\begin{displaymath}
+e_t=\left(s_t,a_t,r_t,s_(t+1)\right)
+\end{displaymath}
+Where $s_t$ refers to the state at turn $t$, $a_t$ refers to the action taken at turn $t$, and $r_t$ refers to the reward at turn $t$.
+The agent stores the data discovered for each turn in a table, and reinforcement learning takes place based on random sampling from the table. This reduces the amount of experience required to learn, replacing it with more computation and memory which are cheaper resources than the agent's continuous interactions with the environment. [Schaul, 2016]
 
 \section{$\epsilon$-Greedy Algorithm}
 
@@ -196,9 +206,9 @@ Having $Rem$ and $Rank(h)$, it is now possible to calculate $HS$ through the for
 \begin{displaymath}
   Behind(h) = \# \left\lbrace \forall x \in Rem:s(x) < Rank(h) \right\rbrace
 \end{displaymath}\\
-Thus, the $EHS$ for player $h$ against $n$ number of opponents is given by:
+Thus, the $EHS$ for player $h$ against 1 opponent is given by:
 \begin{displaymath}
-  EHS(h)= \left( \frac{Ahead(h)+\frac{Tied(h)}{2}}{Ahead(h) + Tied(h) + Behind(h)} \right)^{n}
+  EHS(h)= \frac{Ahead(h)+\frac{Tied(h)}{2}}{Ahead(h) + Tied(h) + Behind(h)}
 \end{displaymath}
 
 \noindent The above formulas used to derive the $EHS$ was referenced from Teofilo \textit{et al.}~\shortcite{trc:hs}. Note that the $EHS$ may be used at any round of the game. However, the number of iterations needed to compute the $EHS$ for a single hand at the pre-flop street is very high. This issue is addressed in the next section using the Average Rank Strength technique.
@@ -207,7 +217,7 @@ Thus, the $EHS$ for player $h$ against $n$ number of opponents is given by:
 
 A technique developed by Teofilo \textit{et al.}~\shortcite{trc:ars} called Average Rank Strength ($ARS$), is used to improve the efficiency of $EHS$. $ARS$ consists of using the hand score to estimate the future outcome of the match, without having to generate all card combinations. This is simply done by storing the average $EHS$ of a hand for each score in three lookup tables, one for Flop, one for Turn and one for River. Since we are not considering suits, the number of possible scores is reduced. The pre-computation of a given score is as follows:
 \begin{displaymath}
-  ARS_{n,5}\left(C_{1}, C_{2}\right)=\left(\frac{\sum_{i}X_{i} \in [\alpha \char`\\ \beta]^{5}:Rank \left(X_{i} \cup \left \lbrace C_{1}, C_{2} \right \rbrace \right)}{\#[\alpha \char`\\ \beta]^{5}}\right)^{n}
+  ARS_{5}\left(C_{1}, C_{2}\right)=(\frac{\sum_{i}X_{i} \in [\alpha \char`\\ \beta]^{5}:Rank \left(X_{i} \cup \left \lbrace C_{1}, C_{2} \right \rbrace \right)}{\#[\alpha \char`\\ \beta]^{5}}
 \end{displaymath}\\
 Where $n$ is the number of opponents and $X_i$ is a distinct subset of size 5 of the deck except the pocket cards.
 
