@@ -11,7 +11,7 @@ from players.learningplayer import LearningPlayer
 from players.randomplayer import RandomPlayer
 import time
 
-NUM_GAMES = 10000
+NUM_GAMES = 5
 DUMP_INTERVAL = 20
 
 
@@ -24,14 +24,18 @@ def init():
     config.register_player(name="rand", algorithm=RandomPlayer())
     config.register_player(name="learn", algorithm=player)
     total_start_time = time.time()
+    total_rounds = 0
 
     for i in range(NUM_GAMES):
         start_time = time.time()
         game_result = start_poker(config, verbose=0)
-        print("Game #{} - {}s".format(i + 1, time.time() - start_time))
+        num_rounds = player.num_rounds_this_game
+        total_rounds += num_rounds
+        print("Game #{} {} rounds - {}s".format(i + 1, num_rounds, time.time() - start_time))
         if i > 0 and i % DUMP_INTERVAL == 0:
             player.write_table(i)
-    print("Total - {}s".format(i + 1, time.time() - total_start_time))
+    print("Unseen combinations: {}".format(player.unseen))
+    print("Total - {} games, {} rounds, {}s".format(i + 1, total_rounds, time.time() - total_start_time))
 
     # for k in range(len(player.gameHistory)):
     #     game = player.gameHistory[k]
