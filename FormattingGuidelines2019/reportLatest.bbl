@@ -1,0 +1,47 @@
+\begin{thebibliography}{}
+
+\bibitem[\protect\citeauthoryear{Dinis and Reis}{2008}]{dinis-reis:modeling}
+Felix Dinis and Luis~Paulo Reis.
+\newblock An experimental approach to online opponent modeling in texas
+  hold’em poker.
+\newblock In {\em Advances in Artificial Intelligence}, pages 83--92, Savador,
+  Brazil, October 2008. Brazilian Symposium on Artificial Intelligence.
+
+\bibitem[\protect\citeauthoryear{Rupeneite}{2010}]{rupeneite:Reinforcement}
+Annija Rupeneite.
+\newblock {\em Building Poker Agent Using Reinforcement Learning with Neural
+  Networks}.
+\newblock SCITEPRESS, 2010.
+
+\bibitem[\protect\citeauthoryear{Russell and
+  Norvig}{2014}]{russell-norvig:Modern}
+Stuart~J. Russell and Peter Norvig.
+\newblock {\em Artificial Intelligence: A Modern Approach}.
+\newblock Prentice Hall, 2014.
+
+\bibitem[\protect\citeauthoryear{Schaul \bgroup \em et al.\egroup
+  }{2016}]{sqas:replay}
+Tom Schaul, John Quan, Ioannis Antonoglou, and David Silver.
+\newblock Prioritized experience replay.
+\newblock In {\em Proceedings of the International Conference on Learning
+  Representations 2016}, pages 1--21, San Juan, Puerto Rico, May 2016. Canada
+  Institute for Scientific and Technical Information.
+
+\bibitem[\protect\citeauthoryear{Teofilo \bgroup \em et al.\egroup
+  }{2013a}]{trc:hs}
+Luis~Filipe Teofilo, Luis~Paulo Reis, and Henrique~Lopes Cardoso.
+\newblock Computing card probabilities in texas hold’em.
+\newblock In {\em Proceedings of the 8th Iberian Conference on Information
+  Systems and Technologies}, pages 988--993, Lisbon, Portugal, June 2013.
+  Canada Institute for Scientific and Technical Information.
+
+\bibitem[\protect\citeauthoryear{Teofilo \bgroup \em et al.\egroup
+  }{2013b}]{trc:ars}
+Luis~Filipe Teofilo, Luis~Paulo Reis, and Henrique~Lopes Cardoso.
+\newblock Speeding-up poker game abstraction computation: Average rank
+  strength.
+\newblock In {\em Proceedings of the 27th Association for the Advancement of
+  Artificial Intelligence Workshop}, pages 59--64, Bellevue, Washington, USA,
+  July 2013. Association for the Advancement of Artificial Intelligence.
+
+\end{thebibliography}
