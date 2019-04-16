@@ -20,6 +20,7 @@ class LearningPlayer(BasePokerPlayer):
         self.learn_factor = 0.1
         self.bb = 0
         self.unseen = 0
+        self.num_rounds_this_game = 0
         streets = ['preflop', 'flop', 'turn', 'river']
         for i in streets:
             self.table[i] = {}
@@ -189,6 +190,7 @@ class LearningPlayer(BasePokerPlayer):
     def receive_game_start_message(self, game_info):
         # print(game_info)
         self.bb = game_info['rule']['small_blind_amount'] * 2
+        self.num_rounds_this_game = 0
         for seat in game_info['seats']:
             if seat['uuid'] != self.uuid:
                 self.opp_uuid = seat['uuid']
@@ -197,6 +199,7 @@ class LearningPlayer(BasePokerPlayer):
 
     def receive_round_start_message(self, round_count, hole_card, seats):
         self.num_rounds_played += 1
+        self.num_rounds_this_game += 1
 
     def receive_street_start_message(self, street, round_state):
         pass
