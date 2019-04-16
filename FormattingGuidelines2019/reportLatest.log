@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2019.4.15)  15 APR 2019 22:35
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2019.2.23)  16 APR 2019 12:10
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -402,10 +402,12 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
  <./WinningProb.PNG>]
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 162.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 162.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <10> not available
 (Font)              Font shape `OT1/ptm/b/it' tried instead on input line 176.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 186.
  [2]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <5> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 235.
@@ -435,11 +437,11 @@ Underfull \hbox (badness 6559) in paragraph at lines 24--29
 
 ] (./reportLatest.aux) ) 
 Here is how much of TeX's memory you used:
- 4902 strings out of 492649
- 72404 string characters out of 6129622
+ 4914 strings out of 492649
+ 72601 string characters out of 6129622
  157195 words of memory out of 5000000
- 8675 multiletter control sequences out of 15000+600000
- 47077 words of font info for 95 fonts, out of 8000000 for 9000
+ 8687 multiletter control sequences out of 15000+600000
+ 51978 words of font info for 106 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  41i,11n,39p,974b,384s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2018/texmf-dist/fonts/enc/dvips/bas
@@ -453,7 +455,7 @@ e/2018/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2018/tex
 mf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2018/texmf-dist/f
 onts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1
 /urw/times/utmri8a.pfb>
-Output written on reportLatest.pdf (4 pages, 711181 bytes).
+Output written on reportLatest.pdf (4 pages, 711183 bytes).
 PDF statistics:
  61 PDF objects out of 1000 (max. 8388607)
  42 compressed objects within 1 object stream

@@ -159,7 +159,7 @@ e_t=\left(s_t,a_t,R_t,s_{t+1}\right)
 \end{displaymath}
 The agent stores the data discovered for each round in a table, and reinforcement learning takes place based on random sampling from the table. This reduces the amount of experience required to learn, replacing it with more computation and memory which are cheaper resources than the agent's continuous interactions with the environment~\cite{sqas:replay}.
 
-\section{$\epsilon$-Greedy Algorithm}
+\subsection{$\epsilon$-Greedy Algorithm}
 
 At every turn, with a probability of $\epsilon$, a random action is chosen to be performed, otherwise an action with the best expected reward is chosen.
 
@@ -219,7 +219,7 @@ A technique developed by Teofilo \textit{et al.}~\shortcite{trc:ars} called Aver
 \end{displaymath}\\
 Where $X_i$ is a distinct subset of size 5 of the deck except the pocket cards.
 
-Thus, compared to $EHS$, $ARS$ had a three orders of magnitude faster response time when querying the lookup table, while also doing so with negligible error~\cite{trc:ars}.
+Thus, compared to $EHS$, $ARS$ had a three orders of magnitude faster response time when querying the lookup table, while also doing so with negligible error~\cite{trc:ars}. 
 
 To find out the estimated $EHS$ for the three post-flop streets, we simulated 2,500,000 rounds each. Additionally, for each round of simulation, we ran the Monte Carlo sampling algorithm 500 times to obtain the $EHS$. The results are displayed below:
 
