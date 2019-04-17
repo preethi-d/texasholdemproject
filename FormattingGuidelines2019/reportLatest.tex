@@ -181,7 +181,7 @@ Where
 \item [\emph{OPS}]refers to the Opponent Playing Style. $OPS$ is grouped into four categories. More details can be found in Section 4.3
 \end{description}
 
-Based on the groupings, the total size of the state space will be 101 x 3 x 35 x 5 x 5 x 4 = 1,060,500
+Without the groupings, the total size of the state space will be very large and it would be infeasible to calculate all possible states. Therefore, we can apply abstraction by grouping some of the features in increments. For example, rather than considering all possible pot sizes between \$0 to \$680, we could instead just consider the increments of \$20 (which is the big blind amount), this will then reduce down our state space by a factor of 20 while not sacrificing the accuracy of the algorithm because the difference between a pot size of \$20 and a pot size of \$21 is very minor. The similar abstraction technique was used on the other features as well to reduce the complexity and cut down the size of the total state space to: 101 x 3 x 35 x 5 x 5 x 4 = 1,060,500 states
 
 \subsection{Expected Hand Strength}
 
@@ -219,7 +219,7 @@ A technique developed by Teofilo \textit{et al.}~\shortcite{trc:ars} called Aver
 \end{displaymath}\\
 Where $X_i$ is a distinct subset of size 5 of the deck except the pocket cards.
 
-Thus, compared to $EHS$, $ARS$ had a three orders of magnitude faster response time when querying the lookup table, while also doing so with negligible error~\cite{trc:ars}. 
+Thus, compared to $EHS$, $ARS$ had a three orders of magnitude faster response time when querying the lookup table, while also doing so with negligible error~\cite{trc:ars}. This is due to the fact that getting the EHS from the lookup table runs in constant time.
 
 To find out the estimated $EHS$ for the three post-flop streets, we simulated 2,500,000 rounds each. Additionally, for each round of simulation, we ran the Monte Carlo sampling algorithm 500 times to obtain the $EHS$. The results are displayed below:
 
