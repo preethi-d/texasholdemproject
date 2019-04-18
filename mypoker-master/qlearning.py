@@ -11,36 +11,63 @@ from players.learningplayer import LearningPlayer
 from players.randomplayer import RandomPlayer
 from players.confirmloseplayer import ConfirmLosePlayer
 from players.raise_player import RaisedPlayer
+from players.rvplayer import RVPlayer
 import time
+import atexit
+import multiprocessing as mp
 
-NUM_GAMES = 100
-DUMP_INTERVAL = 10
+NUM_GAMES = 1000
+MAX_ROUND = 10000
+DUMP_INTERVAL = 100
+GAME_COUNT = 0
+window = {
+    'game_count': 0
+}
+
+def exithandler(player1, player2):
+    player1.write_table('p1-last-run-{}'.format(window['game_count']))
+    # player2.write_table('p2-last-run-{}'.format(window['game_count']))
 
 
 def init():
-    num_games = NUM_GAMES
-    dump_interval = DUMP_INTERVAL
-    qtable = make_table()
-    config = setup_config(max_round=1000, initial_stack=10000, small_blind_amount=10)
+    config = setup_config(max_round=MAX_ROUND, initial_stack=10000, small_blind_amount=10)
 
     player = LearningPlayer()
-    player.load_qtable_from_file("q-table-1200.txt")
+    # player.load_qtable_from_file("gen-0-700-fixed.txt")
+    player2 = RVPlayer()
+    # player2.load_qtable_from_file("gen-0-700-fixed.txt")
+    atexit.register(exithandler, player, player2)
 
-    config.register_player(name="raise", algorithm=RandomPlayer())
-    config.register_player(name="learn", algorithm=player)
+    config.register_player(name="RVPlayer", algorithm=player2)
+    config.register_player(name="learn1", algorithm=player)
     total_start_time = time.time()
     total_rounds = 0
 
-    for i in range(num_games):
+    for i in range(NUM_GAMES):
         start_time = time.time()
-        game_result = start_poker(config, verbose=0)
+        try:
+            game_result = start_poker(config, verbose=0)
+        except:
+            print("Terminated")
+            # GAME_COUNT += 1
+            print(GAME_COUNT)
+            break
+        window['game_count'] += 1
+
         num_rounds = player.num_rounds_this_game
         total_rounds += num_rounds
         print("Game #{} {} rounds - {}s".format(i + 1, num_rounds, time.time() - start_time))
+        print("Unseen hands: {}".format(player.unseen_hands))
+        print("Unseen states: {}".format(player.unseen_states))
+        print("\n".join(list(map(lambda p: "{}: {}".format(p['name'], p['stack']), game_result['players']))))
+        print()
         if i > 0 and i % DUMP_INTERVAL == 0:
             player.write_table(i)
-    print("Unseen combinations: {}".format(player.unseen))
-    print("Total - {} games, {} rounds, {}s".format(num_games, total_rounds, time.time() - total_start_time))
+
+
+    print("Unseen hands: {}".format(player.unseen_hands))
+    print("Unseen states: {}".format(player.unseen_states))
+    print("Total - {} games, {} rounds, {}s".format(NUM_GAMES, total_rounds, time.time() - total_start_time))
 
     # for k in range(len(player.gameHistory)):
     #     game = player.gameHistory[k]
@@ -51,71 +78,5 @@ def init():
     #     # print("\n".join(list(map(lambda p: "{}: {}".format(p['name'], p['stack']), game_result['players']))))
     #     print(game['result']['name'], 'won pot of', game['pot'])
     #     print("stack sizes: {} {}".format(game['self_stack'], game['opp_stack']))
-
-    player.dump_table()
-
-
-def make_table():
-    return {}
-    pass
-
-
-def get_state(ehs, pot_size, opp_play_style, opp_num_raises, self_raises, current_street):
-    return ""
-    pass
-
-
-
-
-def train(n):
-    pass
-
-
-def train_round(epsilon):
-    # set up emulator
-    # run the thing
-    # update weights
-
-    pass
-
-
-def get_hand_strength(self, hole_card, community_card, num_simulation):
-    if not community_card:
-        community_card = []
-    community_card = gen_cards(community_card)
-    hole_card = gen_cards(hole_card)
-    agent_rank = HandEvaluator.eval_hand(hole_card, community_card)
-    ahead_tied_behind = {'ahead': 0, 'tied': 0, 'behind': 0}
-
-    # run monte carlo simulation for num_simulation times
-    [self.montecarlo_simulation_hs(2, hole_card, community_card, ahead_tied_behind, agent_rank) for _ in
-     range(num_simulation)]
-
-    ahead = ahead_tied_behind['ahead']
-    tied = ahead_tied_behind['tied']
-    behind = ahead_tied_behind['behind']
-
-    # return hand strength based on (ahead + tied/2) / (ahead + tied + lose)
-    return (ahead + tied / 2) / (ahead + tied + behind)
-
-# montecarlo simulation for hand strength
-def montecarlo_simulation_hs(self, nb_player, hole_card, community_card, ahead_tied_behind, agent_rank):
-    community_card = _fill_community_card(community_card, used_card=hole_card + community_card)
-    unused_cards = _pick_unused_card((nb_player - 1) * 2, hole_card + community_card)
-    opponents_hole = [unused_cards[2 * i:2 * i + 2] for i in range(nb_player - 1)]
-
-    # get rank of hole_card with the community_card that are faced up
-    opponents_rank = [HandEvaluator.eval_hand(hole, community_card) for hole in opponents_hole]
-
-    if agent_rank > max(opponents_rank):
-        # if win add increment ahead
-        ahead_tied_behind['ahead'] += 1
-    elif agent_rank == max(opponents_rank):
-        # if tie increment tied
-        ahead_tied_behind['tied'] += 1
-    else:
-        # if lose increment behind
-        ahead_tied_behind['behind'] += 1
-    # print(ahead_tied_behind)
 
 init()
