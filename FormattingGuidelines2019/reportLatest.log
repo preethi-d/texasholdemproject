@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2019.2.23)  17 APR 2019 17:25
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2019.4.15)  18 APR 2019 21:15
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -377,23 +377,36 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 72.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 72.
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 81.
+
+(/usr/local/texlive/2018/texmf-dist/tex/latex/psnfss/omsptm.fd
+File: omsptm.fd 
+)
+LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 81.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 82.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 89.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 82.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 89.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 82.
-
-
-Package amsmath Warning: Foreign command \atopwithdelims;
-(amsmath)                \frac or \genfrac should be used instead
-(amsmath)                 on input line 84.
-
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 89.
 <WinningProb.PNG, id=1, 784.64572pt x 350.59554pt>
 File: WinningProb.PNG Graphic file (type png)
 <use WinningProb.PNG>
-Package pdftex.def Info: WinningProb.PNG  used on input line 92.
+Package pdftex.def Info: WinningProb.PNG  used on input line 98.
 (pdftex.def)             Requested size: 243.91125pt x 108.98306pt.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 119.
+
+Underfull \hbox (badness 10000) in paragraph at lines 123--124
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 123--124
+
+ []
+
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
@@ -402,28 +415,12 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
  <./WinningProb.PNG>]
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 162.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 162.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <10> not available
-(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 176.
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 189.
  [2]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <5> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 235.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 273.
-
-(/usr/local/texlive/2018/texmf-dist/tex/latex/psnfss/omsptm.fd
-File: omsptm.fd 
-)
-LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 273.
-
-(./reportLatest.bbl [3]
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 239.
+ (./reportLatest.bbl
 Underfull \hbox (badness 7504) in paragraph at lines 18--21
 []\OT1/ptm/m/n/10 Stuart J. Rus-sell and Pe-ter
  []
@@ -433,17 +430,17 @@ Underfull \hbox (badness 6559) in paragraph at lines 24--29
 []\OT1/ptm/m/n/10 Tom Schaul, John Quan, Ioan-nis
  []
 
-) [4
+[3]) [4
 
 ] (./reportLatest.aux) ) 
 Here is how much of TeX's memory you used:
- 4914 strings out of 492649
- 72601 string characters out of 6129622
- 156195 words of memory out of 5000000
- 8687 multiletter control sequences out of 15000+600000
- 51978 words of font info for 106 fonts, out of 8000000 for 9000
+ 4902 strings out of 492649
+ 72402 string characters out of 6129622
+ 157195 words of memory out of 5000000
+ 8675 multiletter control sequences out of 15000+600000
+ 45965 words of font info for 95 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,11n,39p,974b,384s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 41i,11n,39p,743b,384s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2018/texmf-dist/fonts/enc/dvips/bas
 e/8r.enc}</usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cme
 x10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi
@@ -455,7 +452,7 @@ e/2018/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2018/tex
 mf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2018/texmf-dist/f
 onts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1
 /urw/times/utmri8a.pfb>
-Output written on reportLatest.pdf (4 pages, 711885 bytes).
+Output written on reportLatest.pdf (4 pages, 708537 bytes).
 PDF statistics:
  61 PDF objects out of 1000 (max. 8388607)
  42 compressed objects within 1 object stream

@@ -73,46 +73,54 @@ chungming.tsen@u.nus.edu, e0203237@u.nus.edu, jamespang@nus.edu, lywjoel@u.nus.e
 
 \section{Introduction}
 
-The game of poker has long been a field of interest for artificial intelligence (AI) researchers. This is not surprising as developing an AI poker agent capable of competing with humans at the highest level is challenging, given that poker is a game that forces players to make decisions with incomplete and imperfect information. This paper talks about the steps we took in designing an AI Poker Player agent in Heads Up Limit Texas Hold'em. An agent subjected to reinforcement learning must learn to interact with the environment in order to maximize its reward. Reinforcement learning was chosen as a way to get the best possible action based on the current state.
+The game of poker has long been a field of interest for artificial intelligence (AI) researchers. There are many challenges with developing an AI poker agent capable of competing with humans, since poker is a complex game that forces players to make decisions with incomplete and imperfect information. AI poker agents are hence faced with the task of having to make the best decision at every street under such informational constraints. Additionally, conventional poker matches impose a time limit on players to make a decision, adding another constraint for AI poker agents to work with.
 
-The problem with Limit Texas Hold'em is that there is no input or output training data sets available for the agent to gather feedback from. Hence, the only way an agent can learn is by trial and error based on feedback from its own actions and experiences. A reward function is created, where actions that led to positive outcomes are rewarded, and actions that led to negative outcomes are penalized, with the goal of maximizing its reward. The basis for this project is to design a reward function that is good enough for the agent to master poker. In a game of poker, the agent does not have a complete model of the environment, nor does it know the states that its actions will lead to. Thus, we chose a Q-learning agent, which compares the expected utilities of the remaining choices without the need to know the outcomes nor the model of the environment~\cite{russell-norvig:Modern}, as it fits the scenario of a poker game.
+This paper outlines our design of an AI poker agent for Heads Up Limit Texas Hold’em, which aims to respond competently and accurately with limited information, within a limited amount of time. In tackling the issues above, we employed a three-pronged approach:
 
-\section{Pre-Flop Hand Strength}
+\begin{itemize}
+  \item Using Q-learning, a reinforcement learning algorithm, to train our agent to play with the best possible strategy. (Section 3.1)
+  \item Reduce the overall state size, by grouping similar states together. (Section 3.1, Abstraction of States)
+  \item Precomputing the estimated strength of hand ranks, storing them in look-up tables to allow for retrieval in constant time. (Section 3.3)
+ \end{itemize}
 
-To begin with, we wanted to decide how the agent would determine the strength of its hand, based only on the pre-flop round. Due to the limited amount of information that we can manipulate during the pre-flop round, the strength of a hand, $HS$, at pre-flop is determined by the probability of winning, $Pr(Win)$, based on the prior knowledge of the two hole cards currently in hand. 
+The following two sections will explain our agent’s strategy within each betting round, namely the pre-flop and post-flop round.
+\section{Preflop Street}
 
-To estimate $HS$, we simulated 10,000 games for each possible combination of starting hand. The total combination of starting hands is  13 + ${13 \choose 2}$ = 91, obtained by summing up the combinations of pocket pairs and the combinations of possible hands, ignoring the suits. For each game, we first pick the two starting cards for the agent, followed by randomly picking two starting cards for the opponent and five community cards. Both players' hands are then revealed and the game result determined as a win or a loss for the agent.
+In order to decide how what action the agent would take based only on the limited amount of information it has during the preflop street, we introduce the use of hand strength ($HS$), which is an estimate determined by the probability of winning with the two hole cards currently in the agent’s hand.
+To estimate $HS$, we perform a Monte Carlo simulation of 10,000 games for each possible starting hand. The total number of possible starting hands is 91, which is obtained by summing up the total number of possible pocket pairs and the total number of possible hands disregarding the suits. For each game, we first pick the two starting cards for the agent, followed by randomly picking two starting cards for the opponent and the five community cards. Both players’ hands are then revealed and the game result is determined as a win or a loss for the agent.
 
 We then calculate $Pr(Win)$ using the formula:
 \begin{displaymath}
 Pr(Win)= \frac{\# \text{ } of \text{ } wins}{Total \text{ }games \text{ } played}
 \end{displaymath}
-Where the total games played is fixed at 10,000 in our case. The results of our simulation are seen in Figure \ref{fig:1}.
+Where the total games played is fixed at 10,000. The results of the Monte Carlo simulation are seen in Figure \ref{fig:1}.
 \begin{figure}
   \includegraphics[width=\linewidth]{WinningProb.PNG}
   \caption{Estimated winning probabilities with starting hands}
   \label{fig:1}
 \end{figure}
 
-At every pre-flop street, the agent chooses an action to be performed based on the starting hand's estimated probabilities of winning, which are:
+At every preflop street, the agent chooses an action [fold, call, raise] to take based on the $HS$ of the starting hand:
 \begin{displaymath}
   \left.
   \begin{array}{l}
-    raise \text{: } Pr(Win) > k \\
+    raise \text{: } HS > k \\
     \\
-    call \text{: } Pr(Win) > j \\
+    call \text{: } HS > j \\
     \\
-    fold \text{: } Pr(Win) \leq j
+    fold \text{: } HS \leq j
   \end{array}
   \right\rbrace \quad \text{where } 0 < j < k \leq 1
 \end{displaymath}
 Where $j$ and $k$ are pre-determined thresholds set for the agent.
 
-\section{Post-Flop Rounds}
+\section{Postflop Streets}
 
-In subsequent post-flop rounds, reinforcement learning is employed. Specifically, the technique of Q-learning - which was described in the introduction - was used to train our agent.
+\subsection{Q-learning}
 
-In Q-learning, we maintain a table of states and actions as input for the agent. Each state has a Q-value that corresponds to each action. An illustration of it can be seen in Table 1.
+In subsequent post-flop rounds, reinforcement learning is employed. Specifically, we use a modified version of Q-learning to train our agent.
+
+In Q-learning, we maintain a table of states and actions as input for the agent. Each state has a Q-value that corresponds to each action. An illustration of it can be seen in Table 1. \\ \\
 
 \begin{table}[h!]
   \begin{center}
@@ -133,33 +141,38 @@ In Q-learning, we maintain a table of states and actions as input for the agent.
     \label{tab:table1}
   \end{center}
 \end{table}
-After each training round, the Q-value of each state is calculated and updated based on the formula given below:
-\begin{displaymath}
-Q\left(s',a'\right)=Q\left(s,a\right)+\sum_{0}^{t}\lambda^{t}R_t\left(s,a\right)
-\end{displaymath}
-Where $t$ is the number of turns between the current move and the terminal node, $R_t$ is the reward for round $t$, $\lambda$ is the discount factor, $s$ is the state and $a$ is the action.
+
+The reward function is determined based on the pot size at the end of the game, as seen in the formula below:
 
 \begin{displaymath}
   R_t=
   \left\lbrace
   \begin{array}{l}
-    +\frac{pot}{2}\quad\text{if win,} \\
+    +\frac{P}{2}\quad\text{if win,} \\
     \\
-    -\frac{pot}{2}\quad\text{otherwise}
+    -\frac{P}{2}\quad\text{otherwise}
   \end{array}
   \right.
 \end{displaymath}
+
+
+\noindent Where P is the pot size at the end of the game.
+
+After each training round, the Q-value of each state  is obtained by summing up the previous Q-value and the reward function for that round. More formally,
 \begin{displaymath}
-  \lambda=\text{discount rate for future reward}
+Q\left(s',a'\right)=Q\left(s,a\right)+\sum_{0}^{t}\lambda^{t}R_t\left(s,a\right)
 \end{displaymath}
 
+\noindent Where $t$ is the number of turns between the current move and the terminal node, $R_t$ is the reward for round $t$, $\lambda$ is the discount factor, $s$ is the state, $a$ is the action and $P$ is the pot size.
+
+\subsubsection{Experience Replay}
 Additionally, we applied the technique of experience replay to achieve more efficient use of previous experiences. We store the agent's experiences based on the formula
 \begin{displaymath}
 e_t=\left(s_t,a_t,R_t,s_{t+1}\right)
 \end{displaymath}
 The agent stores the data discovered for each round in a table, and reinforcement learning takes place based on random sampling from the table. This reduces the amount of experience required to learn, replacing it with more computation and memory which are cheaper resources than the agent's continuous interactions with the environment~\cite{sqas:replay}.
 
-\subsection{$\epsilon$-Greedy Algorithm}
+\subsubsection{$\epsilon$-Greedy Algorithm}
 
 At every turn, with a probability of $\epsilon$, a random action is chosen to be performed, otherwise an action with the best expected reward is chosen.
 
@@ -173,73 +186,62 @@ Actions = \{ fold\text{, }call\text{, }raise \}
 Where
 
 \begin{description}[style=multiline,leftmargin=10mm]
-\item [\emph{EHS}]refers to the current Expected Hand Strength of a given player. $EHS$ is grouped in increments of 0.01. More details can be found in Section 4.1.
-\item [\emph{S}]refers to the current Street that the game is in, which is the start of each new round. There are three streets - Flop, Turn and River.
-\item [\emph{P}]refers to the Pot Size, which is the total amount in the player's bet. $P$ in a game ranges from 0 to 680, but by grouping it terms of number of big blinds, we get a range of 0 to 34.
-\item [\emph{\#OR}]refers to the number of Opponent Raises per street. $OR$ is grouped into five different groups, i.e. from 0 to 4.
-\item [\emph{\#SR}]refers to the number of Self Raises per street. $SR$ is grouped into five different groups, i.e. from 0 to 4.
-\item [\emph{OPS}]refers to the Opponent Playing Style. $OPS$ is grouped into four categories. More details can be found in Section 4.3
+\item [\emph{EHS}]refers to the current Expected Hand Strength of a given player. More details can be found in Section 3.2.
+\item [\emph{S}]refers to the current Street that the game is in, which is the start of each new round.
+\item [\emph{P}]refers to the Pot Size, which is the total amount in the player's bet.
+\item [\emph{\#OR}]refers to the number of Opponent Raises per street.
+\item [\emph{\#SR}]refers to the number of Self Raises per street.
+\item [\emph{OPS}]refers to the Opponent Playing Style.
 \end{description}
 
-Without the groupings, the total size of the state space will be very large and it would be infeasible to calculate all possible states. Therefore, we can apply abstraction by grouping some of the features in increments. For example, rather than considering all possible pot sizes between \$0 to \$680, we could instead just consider the increments of \$20 (which is the big blind amount), this will then reduce down our state space by a factor of 20 while not sacrificing the accuracy of the algorithm because the difference between a pot size of \$20 and a pot size of \$21 is very minor. The similar abstraction technique was used on the other features as well to reduce the complexity and cut down the size of the total state space to: 101 x 3 x 35 x 5 x 5 x 4 = 1,060,500 states
+\subsubsection{Abstraction of states}
+Without abstracting the states into groups, the total size of the state space will be very large and it would be infeasible to calculate all possible states. Therefore, we can apply abstraction by grouping some of the features in increments.
+\begin{itemize}
+  \item $EHS$ is grouped in increments of 0.01, from 0 to 1.
+  \item There are three streets - Flop, Turn and River.
+  \item $P$ in a game ranges from \$0 to \$680, but by grouping it in increments of \$40, which is the 2 x big blind amount, since every raise (big blind amount - \$20) must minimally be matched by the opponent, we get a range of 0 to 17.
+  \item $OR$ is grouped into five different groups, i.e. from 0 to 4.
+  \item $SR$ is grouped into five different groups, i.e. from 0 to 4.
+  \item $OPS$ is grouped into four categories. More details can be found in Section 3.4.
+\end{itemize}
+
+These groupings helped reduce the complexity and cut down the size of the total state space to: 101 x 3 x 18 x 5 x 5 x 4 = 545,400 states
+
 
 \subsection{Expected Hand Strength}
 
-The Expected Hand Strength, $EHS$ is the probability of the current hand of a given player winning if the game reaches a showdown. It factors in all possible combinations of the opponents' hands, the remaining hidden board cards, and performing a comparison between the agent's hand and the hands in the enumeration to see which is better. The quality of the hand is then measured based on the number of times the hand turns out to be better. For our $\epsilon$-Greedy Algorithm, the $EHS$ is grouped in increments of 0.01. The remaining cards, $Rem$ is given by:
-\begin{displaymath}
-  Rem = \left[ \alpha \char`\\ \beta \right]^{5}
-\end{displaymath}
-Where $\alpha$ is the set of all cards in the deck, and $\beta$ is the set of all hole cards of a particular player. The formula to calculate the rank of each hand, $Rank(h)$ is:
-\begin{displaymath}
-  Rank(h) = max({\forall x \in [\beta \cup \Omega]^{5} : s(x)})
-\end{displaymath}
-Where $\Omega$ is the set of community cards.
-Having $Rem$ and $Rank(h)$, it is now possible to calculate $HS$ through the formulas below:
-\begin{displaymath}
-  Ahead(h) = \# \left\lbrace \forall x \in Rem:s(x) > Rank(h) \right\rbrace
-\end{displaymath}
-\begin{displaymath}
-  Tied(h) = \# \left\lbrace \forall x \in Rem:s(x) = Rank(h) \right\rbrace
-\end{displaymath}
-\begin{displaymath}
-  Behind(h) = \# \left\lbrace \forall x \in Rem:s(x) < Rank(h) \right\rbrace
-\end{displaymath}\\
-Thus, the $EHS$ for player $h$ against 1 opponent is given by:
+The Expected Hand Strength, $EHS$, is the probability of the current hand of a given player winning if the game reaches a showdown. It factors in all possible combinations of what the opponent's hand could be and the remaining hidden board cards, and compares each of these hands to the agent's hand, to see which is better. The $EHS$ of the agent's hand is then calculated, by finding the number of times that particular hand turns out to be better than the opponent's. We do this by comparing the number of times which the agent had a better hand, to the total number of comparisons. More formally,
 \begin{displaymath}
   EHS(h)= \frac{Ahead(h)+\frac{Tied(h)}{2}}{Ahead(h) + Tied(h) + Behind(h)}
 \end{displaymath}
 
-\noindent The above formulas used to derive the $EHS$ was referenced from Teofilo \textit{et al.}~\shortcite{trc:hs}. Note that the $EHS$ may be used at any round of the game. However, the time required to compute an accurate EHS exceeds the time constraint of 0.2s set by the project guidelines, as the number of iterations needed to compute it for a single hand at the pre-flop street is very high. This issue is addressed by using the Average Rank Strength technique which is explained in the next section.
+\noindent Where $Ahead$, $Tied$, and $Behind$ functions determine respectively the number of times the player's hand wins, ties or loses the game. The above formula used to derive the $EHS$ was referenced from Teofilo \textit{et al.}~\shortcite{trc:hs}. 
 
-\subsection{Average Rank Strength}
+Note that the $EHS$ may be used at any round of the game. However, the time required to compute an accurate EHS exceeds the time constraint of 0.2s set by the project guidelines, as the number of iterations needed to compute it for a single hand at the pre-flop street is very high. This issue is addressed by using the Average Rank Strength technique which is explained in the next section.
 
-A technique developed by Teofilo \textit{et al.}~\shortcite{trc:ars} called Average Rank Strength ($ARS$), is used to improve the efficiency of $EHS$. $ARS$ consists of using the hand score to estimate the future outcome of the match, without having to generate all card combinations. This is simply done by storing the average $EHS$ of a hand for each score in three lookup tables, one for Flop, one for Turn and one for River. Since we are not considering suits, the number of possible scores is reduced. The pre-computation of a given score is as follows:
-\begin{displaymath}
-  ARS_{5}\left(C_{1}, C_{2}\right)=(\frac{\sum_{i}X_{i} \in [\alpha \char`\\ \beta]^{5}:Rank \left(X_{i} \cup \left \lbrace C_{1}, C_{2} \right \rbrace \right)}{\#[\alpha \char`\\ \beta]^{5}}
-\end{displaymath}\\
-Where $X_i$ is a distinct subset of size 5 of the deck except the pocket cards.
+\subsection{EHS Look-up Table}
 
-Thus, compared to $EHS$, $ARS$ had a three orders of magnitude faster response time when querying the lookup table, while also doing so with negligible error~\cite{trc:ars}. This is due to the fact that getting the EHS from the lookup table runs in constant time.
+We devised a technique similar to Average Rank Strength ($ARS$) ~\cite{trc:ars} to improve the efficiency of $EHS$. In our method, three look-up tables are created - one for Flop, one for Turn and one for River. These tables consist of precomputed $EHS$ values for all possible scores. The score value for a particular set of cards refers to the strength of the current hand ranking, and is computed using PyPokerEngine's built-in $HandEvaluator.eval()$ function. For example, given some combination of hole cards and community cards which contain a Pair ranking, $HandEvaluator.eval()$ returns a numeric representation of this hand ranking, which would be lower than if there were a Three-of-a-Kind ranking. 
 
-To find out the estimated $EHS$ for the three post-flop streets, we simulated 2,500,000 rounds each. Additionally, for each round of simulation, we ran the Monte Carlo sampling algorithm 500 times to obtain the $EHS$. The results are displayed below:
+Instead of computing $EHS$ during gameplay, the agent can now simply refer to the look-up table, based on its current score, to obtain its $EHS$. This technique runs in constant time, and responds 1000 times faster with negligible error~\cite{trc:ars}.
+
+To estimate the $EHS$ for the three post-flop streets, we simulated 2.5 million rounds each. Additionally, for each round of simulation, we ran the Monte Carlo sampling algorithm 500 times to obtain the $EHS$. The results are displayed below:
 
 \begin{table}[h!]
   \begin{center}
     \begin{tabular}{l|c}
-      \textbf{Street} & \textbf{Number of Combinations} \\
+      \textbf{Street} & \textbf{Number of Distinct Scores} \\
       \hline
       Flop & 5133 \\
       Turn & 13,408 \\
       River & 17,470 \\
     \end{tabular}
-    \caption{Result of $ARS$ Simulation}
+    \caption{Result of $EHS Look-up Table$ Simulation}
     \label{tab:table2}
   \end{center}
 \end{table}
 
-\noindent The reason for the high number of simulations is that we want to sample as many score combinations as possible.
-
-Based on the results from simulating 100,000 rounds, approximately 99.87\% of the scores can be found in the table. This goes to show that our three $ARS$ tables are highly reliable.
+\noindent We are aware that not all possible scores may have been captured in the tables generated during the 2.5 million rounds. However, despite this, the results from simulating 100,000 games show that approximately 99.87 percent of the scores can be found in the table. This goes to show that our three $look-up$ tables are highly reliable.
 
 \subsection{Opponent Playing Styles}
 
