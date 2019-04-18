@@ -86,12 +86,12 @@ This paper outlines our design of an AI poker agent for Heads Up Limit Texas Hol
 The following two sections will explain our agent’s strategy within each betting round, namely the pre-flop and post-flop round.
 \section{Preflop Street}
 
-In order to decide how what action the agent would take based only on the limited amount of information it has during the preflop street, we introduce the use of hand strength ($HS$), which is an estimate determined by the probability of winning with the two hole cards currently in the agent’s hand.
+In order to decide what action the agent would take based only on the limited amount of information it has during the preflop street, we introduce the use of hand strength ($HS$), which is an estimate determined by the probability of winning with the two hole cards currently in the agent’s hand.
 To estimate $HS$, we perform a Monte Carlo simulation of 10,000 games for each possible starting hand. The total number of possible starting hands is 91, which is obtained by summing up the total number of possible pocket pairs and the total number of possible hands disregarding the suits. For each game, we first pick the two starting cards for the agent, followed by randomly picking two starting cards for the opponent and the five community cards. Both players’ hands are then revealed and the game result is determined as a win or a loss for the agent.
 
-We then calculate $Pr(Win)$ using the formula:
+We then calculate $HS$ using the formula:
 \begin{displaymath}
-Pr(Win)= \frac{\# \text{ } of \text{ } wins}{Total \text{ }games \text{ } played}
+ HS = Pr(Win)= \frac{\# \text{ } of \text{ } wins}{Total \text{ }games \text{ } played}
 \end{displaymath}
 Where the total games played is fixed at 10,000. The results of the Monte Carlo simulation are seen in Figure \ref{fig:1}.
 \begin{figure}
@@ -141,9 +141,7 @@ In Q-learning, we maintain a table of states and actions as input for the agent.
     \label{tab:table1}
   \end{center}
 \end{table}
-
 The reward function is determined based on the pot size at the end of the game, as seen in the formula below:
-
 \begin{displaymath}
   R_t=
   \left\lbrace
@@ -154,9 +152,7 @@ The reward function is determined based on the pot size at the end of the game, 
   \end{array}
   \right.
 \end{displaymath}
-
-
-\noindent Where P is the pot size at the end of the game.
+\noindent Where $P$ is the pot size at the end of the game.
 
 After each training round, the Q-value of each state  is obtained by summing up the previous Q-value and the reward function for that round. More formally,
 \begin{displaymath}
@@ -194,12 +190,12 @@ Where
 \item [\emph{OPS}]refers to the Opponent Playing Style.
 \end{description}
 
-\subsubsection{Abstraction of states}
+\subsubsection{Abstraction of States}
 Without abstracting the states into groups, the total size of the state space will be very large and it would be infeasible to calculate all possible states. Therefore, we can apply abstraction by grouping some of the features in increments.
 \begin{itemize}
   \item $EHS$ is grouped in increments of 0.01, from 0 to 1.
   \item There are three streets - Flop, Turn and River.
-  \item $P$ in a game ranges from \$0 to \$680, but by grouping it in increments of \$40, which is the 2 x big blind amount, since every raise (big blind amount - \$20) must minimally be matched by the opponent, we get a range of 0 to 17.
+  \item $P$ in a game ranges from \$0 to \$680, but by grouping it in increments of \$40, which is the 2 times big blind amount, since every raise (big blind amount - \$20) must minimally be matched by the opponent, we get a range of 0 to 17.
   \item $OR$ is grouped into five different groups, i.e. from 0 to 4.
   \item $SR$ is grouped into five different groups, i.e. from 0 to 4.
   \item $OPS$ is grouped into four categories. More details can be found in Section 3.4.
