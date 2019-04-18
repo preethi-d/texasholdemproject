@@ -1,0 +1,17 @@
+diff a/FormattingGuidelines2019/reportLatest.pdf b/FormattingGuidelines2019/reportLatest.pdf	(rejected hunks)
+@@ -85,11 +85,11 @@
+ the terminal node, Rt is the reward for round t, λ is the dis-    than considering all possible pot sizes between $0 to $680,
+ count factor, s is the state and a is the action.                 we could instead just consider the increments of $20 (which
+                                                                   is the big blind amount), this will then reduce down our state
+-         +  pot  if win,                                         space by a factor of 20 while not sacriﬁcing the accuracy of
+-             2   otherwise                                       the algorithm because the difference between a pot size of $20
++         +  P  if win,                                           space by a factor of 20 while not sacriﬁcing the accuracy of
++            2  otherwise                                         the algorithm because the difference between a pot size of $20
+                                                                   and a pot size of $21 is very minor. The similar abstraction
+-Rt =         pot                                                  technique was used on the other features as well to reduce the
+-              2                                                   complexity and cut down the size of the total state space to:
++Rt =         P                                                    technique was used on the other features as well to reduce the
++             2                                                    complexity and cut down the size of the total state space to:
+          −                                                       101 x 3 x 35 x 5 x 5 x 4 = 1,060,500 states
+ 
+ λ = discount rate for future reward                               3.2 Expected Hand Strength
