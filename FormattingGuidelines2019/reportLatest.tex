@@ -73,10 +73,17 @@ chungming.tsen@u.nus.edu, e0203237@u.nus.edu, jamespang@nus.edu, lywjoel@u.nus.e
 
 \section{Introduction}
 
-The game of poker has long been a field of interest for artificial intelligence (AI) researchers. This is not surprising as developing an AI poker agent capable of competing with humans at the highest level is challenging, given that poker is a game that forces players to make decisions with incomplete and imperfect information. This paper talks about the steps we took in designing an AI Poker Player agent in Heads Up Limit Texas Hold'em. An agent subjected to reinforcement learning must learn to interact with the environment in order to maximize its reward. Reinforcement learning was chosen as a way to get the best possible action based on the current state.
+The game of poker has long been a field of interest for artificial intelligence (AI) researchers. There are many challenges with developing an AI poker agent capable of competing with humans, since poker is a complex game that forces players to make decisions with incomplete and imperfect information. AI poker agents are hence faced with the task of having to make the best decision at every street under such informational constraints. Additionally, conventional poker matches impose a time limit on players to make a decision, adding another constraint for AI poker agents to work with.
 
-The problem with Limit Texas Hold'em is that there is no input or output training data sets available for the agent to gather feedback from. Hence, the only way an agent can learn is by trial and error based on feedback from its own actions and experiences. A reward function is created, where actions that led to positive outcomes are rewarded, and actions that led to negative outcomes are penalized, with the goal of maximizing its reward. The basis for this project is to design a reward function that is good enough for the agent to master poker. In a game of poker, the agent does not have a complete model of the environment, nor does it know the states that its actions will lead to. Thus, we chose a Q-learning agent, which compares the expected utilities of the remaining choices without the need to know the outcomes nor the model of the environment~\cite{russell-norvig:Modern}, as it fits the scenario of a poker game.
+This paper outlines our design of an AI poker agent for Heads Up Limit Texas Hold’em, which aims to respond competently and accurately with limited information, within a limited amount of time. In tackling the issues above, we employed a three-pronged approach:
 
+\begin{itemize}
+  \item Using Q-learning, a reinforcement learning algorithm, to train our agent to play with the best possible strategy. (Section 3)
+  \item Using the Average Rank Strength (ARS) heuristic and other methods of abstracting information sets to reduce the overall state size. (Sections 3.1, 3.3)
+  \item Precomputing the estimated hand strength of possible card sets to allow the agent to retrieve information in linear time.
+\end{itemize}
+
+The following two sections will explain our agent’s strategy within each betting round, namely the pre-flop and post-flop round.
 \section{Pre-Flop Hand Strength}
 
 To begin with, we wanted to decide how the agent would determine the strength of its hand, based only on the pre-flop round. Due to the limited amount of information that we can manipulate during the pre-flop round, the strength of a hand, $HS$, at pre-flop is determined by the probability of winning, $Pr(Win)$, based on the prior knowledge of the two hole cards currently in hand. 
@@ -110,6 +117,8 @@ Where $j$ and $k$ are pre-determined thresholds set for the agent.
 
 \section{Post-Flop Rounds}
 
+\subsection{Q-learning}
+
 In subsequent post-flop rounds, reinforcement learning is employed. Specifically, the technique of Q-learning - which was described in the introduction - was used to train our agent.
 
 In Q-learning, we maintain a table of states and actions as input for the agent. Each state has a Q-value that corresponds to each action. An illustration of it can be seen in Table 1.
@@ -137,15 +146,15 @@ After each training round, the Q-value of each state is calculated and updated b
 \begin{displaymath}
 Q\left(s',a'\right)=Q\left(s,a\right)+\sum_{0}^{t}\lambda^{t}R_t\left(s,a\right)
 \end{displaymath}
-Where $t$ is the number of turns between the current move and the terminal node, $R_t$ is the reward for round $t$, $\lambda$ is the discount factor, $s$ is the state and $a$ is the action.
+Where $t$ is the number of turns between the current move and the terminal node, $R_t$ is the reward for round $t$, $\lambda$ is the discount factor, $s$ is the state, $a$ is the action and $P$ is the pot size.
 
 \begin{displaymath}
   R_t=
   \left\lbrace
   \begin{array}{l}
-    +\frac{pot}{2}\quad\text{if win,} \\
+    +\frac{P}{2}\quad\text{if win,} \\
     \\
-    -\frac{pot}{2}\quad\text{otherwise}
+    -\frac{P}{2}\quad\text{otherwise}
   \end{array}
   \right.
 \end{displaymath}
@@ -159,7 +168,7 @@ e_t=\left(s_t,a_t,R_t,s_{t+1}\right)
 \end{displaymath}
 The agent stores the data discovered for each round in a table, and reinforcement learning takes place based on random sampling from the table. This reduces the amount of experience required to learn, replacing it with more computation and memory which are cheaper resources than the agent's continuous interactions with the environment~\cite{sqas:replay}.
 
-\subsection{$\epsilon$-Greedy Algorithm}
+\subsubsection{$\epsilon$-Greedy Algorithm}
 
 At every turn, with a probability of $\epsilon$, a random action is chosen to be performed, otherwise an action with the best expected reward is chosen.
 
@@ -173,15 +182,27 @@ Actions = \{ fold\text{, }call\text{, }raise \}
 Where
 
 \begin{description}[style=multiline,leftmargin=10mm]
-\item [\emph{EHS}]refers to the current Expected Hand Strength of a given player. $EHS$ is grouped in increments of 0.01. More details can be found in Section 4.1.
-\item [\emph{S}]refers to the current Street that the game is in, which is the start of each new round. There are three streets - Flop, Turn and River.
-\item [\emph{P}]refers to the Pot Size, which is the total amount in the player's bet. $P$ in a game ranges from 0 to 680, but by grouping it terms of number of big blinds, we get a range of 0 to 34.
-\item [\emph{\#OR}]refers to the number of Opponent Raises per street. $OR$ is grouped into five different groups, i.e. from 0 to 4.
-\item [\emph{\#SR}]refers to the number of Self Raises per street. $SR$ is grouped into five different groups, i.e. from 0 to 4.
-\item [\emph{OPS}]refers to the Opponent Playing Style. $OPS$ is grouped into four categories. More details can be found in Section 4.3
+\item [\emph{EHS}]refers to the current Expected Hand Strength of a given player. More details can be found in Section 3.2.
+\item [\emph{S}]refers to the current Street that the game is in, which is the start of each new round.
+\item [\emph{P}]refers to the Pot Size, which is the total amount in the player's bet.
+\item [\emph{\#OR}]refers to the number of Opponent Raises per street.
+\item [\emph{\#SR}]refers to the number of Self Raises per street.
+\item [\emph{OPS}]refers to the Opponent Playing Style.
 \end{description}
 
-Without the groupings, the total size of the state space will be very large and it would be infeasible to calculate all possible states. Therefore, we can apply abstraction by grouping some of the features in increments. For example, rather than considering all possible pot sizes between \$0 to \$680, we could instead just consider the increments of \$20 (which is the big blind amount), this will then reduce down our state space by a factor of 20 while not sacrificing the accuracy of the algorithm because the difference between a pot size of \$20 and a pot size of \$21 is very minor. The similar abstraction technique was used on the other features as well to reduce the complexity and cut down the size of the total state space to: 101 x 3 x 35 x 5 x 5 x 4 = 1,060,500 states
+\subsubsection{Abstraction of states}
+Without abstracting the states into groups, the total size of the state space will be very large and it would be infeasible to calculate all possible states. Therefore, we can apply abstraction by grouping some of the features in increments.
+\begin{itemize}
+  \item $EHS$ is grouped in increments of 0.01.
+  \item There are three streets - Flop, Turn and River.
+  \item $P$ in a game ranges from \$0 to \$680, but by grouping it in increments of \$40, which is the 2 x big blind amount, since every raise (big blind amount - \$20) must minimally be matched by the opponent, we get a range of 0 to 17.
+  \item $OR$ is grouped into five different groups, i.e. from 0 to 4.
+  \item $SR$ is grouped into five different groups, i.e. from 0 to 4.
+  \item $OPS$ is grouped into four categories. More details can be found in Section 3.4.
+\end{itemize}
+
+These groupings helped reduce the complexity and cut down the size of the total state space to: 101 x 3 x 35 x 5 x 5 x 4 = 1,060,500 states
+
 
 \subsection{Expected Hand Strength}
 
