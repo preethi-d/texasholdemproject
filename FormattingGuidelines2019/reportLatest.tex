@@ -153,18 +153,18 @@ The reward function is determined based on the pot size at the end of the game, 
 \end{displaymath}
 \noindent Where $P$ is the pot size at the end of the game.
 
-After each training round, the Q-value of each state  is obtained by summing up the previous Q-value and the reward function for that round. More formally,
+After each training round, the Q-value of each state is obtained by summing up the previous Q-value and the reward function for that round. More formally,
 \begin{displaymath}
 Q\left(s',a'\right)=Q\left(s,a\right)+\sum_{0}^{t}\lambda^{t}R_t\left(s,a\right)
 \end{displaymath}
 \noindent Where $t$ is the number of turns between the current move and the terminal node, $R_t$ is the reward for round $t$, $\lambda$ is the discount factor, $s$ is the state, $a$ is the action and $P$ is the pot size.
 
 \subsubsection{Experience Replay}
-Additionally, we applied the technique of experience replay to achieve more efficient use of previous experiences. We store the agent's experiences based on the formula
+Additionally, we apply the technique of experience replay to achieve more efficient use of previous experiences. We store the agent's experiences based on the formula
 \begin{displaymath}
 e_t=\left(s_t,a_t,R_t,s_{t+1}\right)
 \end{displaymath}
-The agent stores the data discovered for each round in a table, and reinforcement learning takes place based on random sampling from the table. This reduces the amount of experience required to learn, replacing it with more computation and memory which are cheaper resources than the agent's continuous interactions with the environment~\cite{sqas:replay}.
+The agent stores the data it discovers for each round in a table, and reinforcement learning takes place based on random sampling from the table. This reduces the amount of experience required to learn, replacing it with more computation and memory which are cheaper resources than the agent's continuous interactions with the environment~\cite{sqas:replay}.
 
 \subsubsection{$\epsilon$-Greedy Algorithm}
 
@@ -194,12 +194,12 @@ Without abstracting the states into groups, the total size of the state space wi
   \item $EHS$ is grouped in increments of 0.01, from 0 to 1.
   \item There are three streets - Flop, Turn and River.
   \item $P$ in a game ranges from \$0 to \$680, but by grouping it in increments of \$40, which is the 2 times big blind amount, since every raise (big blind amount - \$20) must minimally be matched by the opponent, we get a range of 0 to 17.
-  \item $OR$ is grouped into five different groups, i.e. from 0 to 4.
-  \item $SR$ is grouped into five different groups, i.e. from 0 to 4.
+  \item $\#OR$ is grouped into five different groups, i.e. from 0 to 4.
+  \item $\#SR$ is grouped into five different groups, i.e. from 0 to 4.
   \item $OPS$ is grouped into four categories. More details can be found in Section 3.4.
 \end{itemize}
 
-These groupings helped reduce the complexity and cut down the size of the total state space to: 101 x 3 x 18 x 5 x 5 x 4 = 545,400 states
+These groupings help to reduce the complexity and cut down the size of the total state space to: $101 \times 3 \times 18 \times 5 \times 5 \times 4 = 545,400$ states
 
 
 \subsection{Expected Hand Strength}
@@ -295,6 +295,12 @@ Later, a classification process, introduced by Dinis and Reis~\shortcite{dinis-r
     \label{tab:table4}
   \end{center}
 \end{table}
+
+\section{Limitations}
+
+In theory, our method should work. However, due to the lack of time, our agent did not have sufficient training and therefore the Q-values do not converge. This has resulted in the agent unable to take the best decision based on its current state. Currently, our agent
+
+2. A lot of hands mapped to the same EHS, so trying to play the same way is flawed.
 
 \iffalse
 \section{Hand Potential}
