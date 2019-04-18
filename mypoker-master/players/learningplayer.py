@@ -2,6 +2,7 @@ from pypokerengine.players import BasePokerPlayer
 from pypokerengine.engine.hand_evaluator import HandEvaluator
 from pypokerengine.utils.card_utils import _fill_community_card, _pick_unused_card, gen_cards
 import random as rand
+import qtable
 
 
 class LearningPlayer(BasePokerPlayer):
@@ -11,16 +12,19 @@ class LearningPlayer(BasePokerPlayer):
     self_raises = 0
     num_rounds_played = 0
 
-    def __init__(self):
+    def __init__(self, log_level=0):
         self.actionHistory = []
         self.gameHistory = []
+        self.qtable = qtable.QTable()
         self.table = {}
-        self.qtable = {}
         self.epsilon = 0.1
-        self.learn_factor = 0.1
+        self.learn_factor = 0.05
+        self.discount_factor = 0.5
         self.bb = 0
-        self.unseen = 0
+        self.unseen_hands = 0
+        self.unseen_states = 0
         self.num_rounds_this_game = 0
+        self.log_level = log_level
         streets = ['preflop', 'flop', 'turn', 'river']
         for i in streets:
             self.table[i] = {}
@@ -36,61 +40,45 @@ class LearningPlayer(BasePokerPlayer):
                 score, strength = i.strip().split(" ")
                 self.table[street][score] = strength
 
-    def update_table(self, current_street, _ehs, _pot_size, opp_play_style, self_raises, action, _reward):
-        ehs = "{:.2}".format(float(_ehs))
-        pot_size = str(round(_pot_size / self.bb))
-        reward = _reward / self.bb
+    def get_table(self, attrs):
+        return self.qtable.get(attrs)
 
-        table = self.qtable
-        if not current_street in table: table[current_street] = {}
-        if not ehs in table[current_street]: table[current_street][ehs] = {}
-        if not pot_size in table[current_street][ehs]: table[current_street][ehs][pot_size] = {}
-        if not opp_play_style in table[current_street][ehs][pot_size]: table[current_street][ehs][pot_size][
-            opp_play_style] = {}
-        if not self_raises in table[current_street][ehs][pot_size][opp_play_style]:
-            table[current_street][ehs][pot_size][opp_play_style][self_raises] = {}
-        if not action in table[current_street][ehs][pot_size][opp_play_style][self_raises]:
-            table[current_street][ehs][pot_size][opp_play_style][self_raises][action] = [0, 0]
-        q, c = table[current_street][ehs][pot_size][opp_play_style][self_raises][action]
-        q2 = q * (1 - self.learn_factor) + reward * self.learn_factor
-        table[current_street][ehs][pot_size][opp_play_style][self_raises][action] = [q2, c+1]
+    def set_table(self, attrs, val):
+        self.qtable.set(attrs, val)
+
+    def update_table(self, attrs, reward):
+        lf = self.learn_factor
+        q0, c0 = self.get_table(attrs)
+        if not q0:
+            q0, c0 = 0, 0
+            lf = 1
+
+        q1 = q0 * (1 - lf) + reward * lf
+        c1 = c0 + 1
+        self.log("q: {} -> {} (r: {}|{}) n: {} state: {}".format(str(q0), str(q1), str(reward), str(lf), str(c1), attrs), 1)
+        self.set_table(attrs, [q1, c1])
+
+    def get_normalized_pot(self, pot):
+        return round(0.5 * pot / self.bb)
 
     def write_table(self, id):
-        file = open("q-table-{}.txt".format(id), "w")
-        data = "\n".join(self.dump_table())
-        file.write(data)
-        print("written to q-table-{}.txt".format(id))
+        filename = "q-table-{}.txt".format(id)
+        self.qtable.writefile(filename)
+        self.log("written to {}".format(filename), 0)
 
     def dump_table(self):
-        out = []
-        for _street in self.qtable:
-            street = self.qtable[_street]
-            for _ehs in street:
-                ehs = street[_ehs]
-                for _pot in ehs:
-                    pot = ehs[_pot]
-                    for _opp_play_style in pot:
-                        opp_play_style = pot[_opp_play_style]
-                        for _self_raises in opp_play_style:
-                            self_raises = opp_play_style[_self_raises]
-                            for _action in self_raises:
-                                q = str(self_raises[_action])
-                                out.append(", ".join([_street, _ehs, _pot, str(_opp_play_style), str(_self_raises), _action, q]))
-                                # print(_street, _ehs, _pot, _opp_play_style, _self_raises, _action, q)
-
-        # print("Unseen combinations", self.unseen)
-        return out
+        return self.qtable.aslist()
 
     def getEHS(self, street, hole_card, community_card):
         score = HandEvaluator.eval_hand(gen_cards(hole_card), gen_cards(community_card))
         # print(score)
         if str(score) in self.table[street]:
-            return float(self.table[street][str(score)])
-        print("Unseen combination")
-        self.unseen += 1
+            return round(float(self.table[street][str(score)]), 2)
+        # print("Unseen hand")
+        self.unseen_hands += 1
         calc_ehs = self.get_hand_strength(hole_card, community_card, 100)
         self.table[street][score] = calc_ehs
-        return calc_ehs
+        return round(calc_ehs, 2)
         # print(street, hole_card, community_card, score)
         # # print(self.table[street][str(score)])
         # return 0
@@ -149,37 +137,66 @@ class LearningPlayer(BasePokerPlayer):
         else:
             return 3
 
+    def load_qtable_from_file(self, filename):
+        self.qtable.loadfile(filename)
+
+    def log(self, msg, level = 0):
+        if (level <= self.log_level):
+            print(msg)
+
     def declare_action(self, valid_actions, hole_card, round_state):
-        r = rand.random()
         street = round_state['street']
         community_card = round_state['community_card']
         ehs = self.getEHS(street, hole_card, community_card)
+        pot = self.get_normalized_pot(round_state['pot']['main']['amount'])
+        opp_playstyle = self.get_opponent_play_style()
+        self_raises = self.self_raises
         action = ''
-        isRandom = ''
-        if ehs == 0:
-            # isRandom = ' (random)'
-            ehs = float(rand.random())
-            print('ehs', ehs)
-        if ehs > 0.7 and len(valid_actions) == 3:
-            self.self_raises += 1
-            action = 'raise'
-        elif ehs > 0.2:
-            action = 'call'
-        else:
-            action = 'fold'
 
-        # if state in qtable:
-        #     action = max_action(qtable[state])
-        #     if random < epsilon
-        #         action = random action
-        # return action
+        # Use q-table with epsilon-greedy algo to determine action
+        if rand.random() < self.epsilon:
+            action = valid_actions[round(rand.random() * (len(valid_actions) - 1))]['action']
+            self.log("random action: {}".format(action), 1)
+        else:
+            found = False
+            actions = [
+                'fold', 'call', 'raise'
+            ]
+
+            actions = list(map(lambda act: [act, self.get_table({
+                    'street': street,
+                    'ehs': str(round(ehs, 3)),
+                    'pot': str(pot),
+                    'action': act
+                })[0]], actions))
+
+            best = None
+            bestVal = float('-inf')
+            for c in actions:
+                if c[0] and c[1] and float(c[1]) > bestVal:
+                    best = c[0]
+                    bestVal = float(c[1])
+                    found = True
+
+            found = False
+            if not found:
+                # print("bye")
+                self.unseen_states += 1
+                action = valid_actions[round(rand.random() * (len(valid_actions) - 1))]['action']
+                self.log("random action: {}".format(action), 1)
+            else:
+                self.log("Best: {}".format(best), 1)
+                action = best
+
+        if action == 'raise':
+            self.self_raises += 1
 
         self.actionHistory.append({
             'street': round_state['street'],
-            'pot': round_state['pot']['main']['amount'],
+            'pot': pot,
             'hole_cards': hole_card,
             'community_cards': community_card,
-            'ehs': str(ehs) + isRandom,
+            'ehs': str(ehs),
             'action': action,
             'opp_playstyle': self.get_opponent_play_style(),
             'valid_actions': valid_actions,
@@ -194,12 +211,11 @@ class LearningPlayer(BasePokerPlayer):
         for seat in game_info['seats']:
             if seat['uuid'] != self.uuid:
                 self.opp_uuid = seat['uuid']
-        # print("my uuid: " + self.uuid)
-        # print("opp uuid: " + self.opp_uuid)
 
     def receive_round_start_message(self, round_count, hole_card, seats):
         self.num_rounds_played += 1
         self.num_rounds_this_game += 1
+        # print("=" * 5 + "Round {}".format(round_count) + "=" * 5)
 
     def receive_street_start_message(self, street, round_state):
         pass
@@ -216,35 +232,19 @@ class LearningPlayer(BasePokerPlayer):
                 self.opp_num_folds += 1
 
     def receive_round_result_message(self, winners, hand_info, round_state):
-        # dict_keys([
-        # 'street',
-        # 'pot',
-        # 'community_card',
-        # 'dealer_btn',
-        # 'next_player',
-        # 'small_blind_pos',
-        # 'big_blind_pos',
-        # 'round_count',
-        # 'small_blind_amount',
-        # 'seats',
-        # 'action_histories'])
-        # print(i['round_state'].keys())
-
-        # self.actionHistory.append({
-        #     'street': round_state['street'],
-        #     'pot': round_state['pot']['main']['amount'],
-        #     'hole_cards': hole_card,
-        #     'community_cards': community_card,
-        #     'ehs': str(ehs) + isRandom,
-        #     'action': action,
-        #     'opp_playstyle': self.get_opponent_play_style(),
-        #     'valid_actions': valid_actions
-        # })
         won_round = winners[0]['uuid'] == self.uuid
-        reward = round_state['pot']['main']['amount'] * (2 * won_round - 1) / 2
-        for action in self.actionHistory:
-            self.update_table(action['street'], action['ehs'], action['pot'], action['opp_playstyle'],
-                              action['self_raises'], action['action'], reward)
+        reward = self.get_normalized_pot(round_state['pot']['main']['amount'] * (2 * won_round - 1) / 2)
+        for i in range(len(self.actionHistory)):
+            action = self.actionHistory[i]
+            distance = len(self.actionHistory) - i - 1
+            self.update_table({
+                'street': action['street'],
+                'ehs': action['ehs'],
+                'pot': action['pot'],
+                'opp_ps': action['opp_playstyle'],
+                'self_raises': action['self_raises'],
+                'action': action['action']
+            }, self.discount_factor**distance * reward)
 
         self.gameHistory.append({
             'action_history': self.actionHistory,
