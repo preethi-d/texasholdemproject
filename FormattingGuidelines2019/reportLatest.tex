@@ -115,12 +115,11 @@ At every preflop street, the agent chooses an action [fold, call, raise] to take
 Where $j$ and $k$ are pre-determined thresholds set for the agent.
 
 \section{Postflop Streets}
+The postflop streets consist of Flop, Turn and River. As compared to preflop street, at least three community cards are revealed, giving us more information to work with. During the postflop rounds, reinforcement learning is employed. Specifically, we use a modified version of Q-learning to train our agent.
 
 \subsection{Q-learning}
 
-In subsequent post-flop rounds, reinforcement learning is employed. Specifically, we use a modified version of Q-learning to train our agent.
-
-In Q-learning, we maintain a table of states and actions as input for the agent. Each state has a Q-value that corresponds to each action. An illustration of it can be seen in Table 1. \\ \\
+In Q-learning, we maintain a table of states and actions as input for the agent. Each state has a Q-value that corresponds to each action. An illustration of it can be seen in Table 1.
 
 \begin{table}[h!]
   \begin{center}
@@ -141,9 +140,7 @@ In Q-learning, we maintain a table of states and actions as input for the agent.
     \label{tab:table1}
   \end{center}
 \end{table}
-
 The reward function is determined based on the pot size at the end of the game, as seen in the formula below:
-
 \begin{displaymath}
   R_t=
   \left\lbrace
@@ -154,15 +151,12 @@ The reward function is determined based on the pot size at the end of the game, 
   \end{array}
   \right.
 \end{displaymath}
-
-
-\noindent Where P is the pot size at the end of the game.
+\noindent Where $P$ is the pot size at the end of the game.
 
 After each training round, the Q-value of each state  is obtained by summing up the previous Q-value and the reward function for that round. More formally,
 \begin{displaymath}
 Q\left(s',a'\right)=Q\left(s,a\right)+\sum_{0}^{t}\lambda^{t}R_t\left(s,a\right)
 \end{displaymath}
-
 \noindent Where $t$ is the number of turns between the current move and the terminal node, $R_t$ is the reward for round $t$, $\lambda$ is the discount factor, $s$ is the state, $a$ is the action and $P$ is the pot size.
 
 \subsubsection{Experience Replay}
@@ -236,12 +230,12 @@ To estimate the $EHS$ for the three post-flop streets, we simulated 2.5 million 
       Turn & 13,408 \\
       River & 17,470 \\
     \end{tabular}
-    \caption{Result of $EHS Look-up Table$ Simulation}
+    \caption{Result of $EHS$ Look-up Tables Simulation}
     \label{tab:table2}
   \end{center}
 \end{table}
 
-\noindent We are aware that not all possible scores may have been captured in the tables generated during the 2.5 million rounds. However, despite this, the results from simulating 100,000 games show that approximately 99.87 percent of the scores can be found in the table. This goes to show that our three $look-up$ tables are highly reliable.
+\noindent We are aware that not all possible scores may have been captured in the tables generated during the 2.5 million rounds. However, despite this, the results from simulating 100,000 games show that approximately 99.87 percent of the scores can be found in the table. This goes to show that our three look-up tables are highly reliable.
 
 \subsection{Opponent Playing Styles}
 
