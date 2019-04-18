@@ -9,24 +9,29 @@
 from pypokerengine.api.game import setup_config, start_poker
 from players.learningplayer import LearningPlayer
 from players.randomplayer import RandomPlayer
+from players.confirmloseplayer import ConfirmLosePlayer
+from players.raise_player import RaisedPlayer
 import time
 
-NUM_GAMES = 5
-DUMP_INTERVAL = 20
+NUM_GAMES = 100
+DUMP_INTERVAL = 10
 
 
 def init():
+    num_games = NUM_GAMES
+    dump_interval = DUMP_INTERVAL
     qtable = make_table()
     config = setup_config(max_round=1000, initial_stack=10000, small_blind_amount=10)
 
     player = LearningPlayer()
+    player.load_qtable_from_file("q-table-1200.txt")
 
-    config.register_player(name="rand", algorithm=RandomPlayer())
+    config.register_player(name="raise", algorithm=RandomPlayer())
     config.register_player(name="learn", algorithm=player)
     total_start_time = time.time()
     total_rounds = 0
 
-    for i in range(NUM_GAMES):
+    for i in range(num_games):
         start_time = time.time()
         game_result = start_poker(config, verbose=0)
         num_rounds = player.num_rounds_this_game
@@ -35,7 +40,7 @@ def init():
         if i > 0 and i % DUMP_INTERVAL == 0:
             player.write_table(i)
     print("Unseen combinations: {}".format(player.unseen))
-    print("Total - {} games, {} rounds, {}s".format(i + 1, total_rounds, time.time() - total_start_time))
+    print("Total - {} games, {} rounds, {}s".format(num_games, total_rounds, time.time() - total_start_time))
 
     # for k in range(len(player.gameHistory)):
     #     game = player.gameHistory[k]

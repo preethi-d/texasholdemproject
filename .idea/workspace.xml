@@ -2,6 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="926c2823-a726-496a-aee1-b4a9af149f78" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/mypoker-master/load_table_test.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mypoker-master/scripts/table_vis.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/texasholdemproject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/texasholdemproject.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mypoker-master/players/learningplayer.py" beforeDir="false" afterPath="$PROJECT_DIR$/mypoker-master/players/learningplayer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mypoker-master/qlearning.py" beforeDir="false" afterPath="$PROJECT_DIR$/mypoker-master/qlearning.py" afterDir="false" />
     </list>
@@ -15,17 +19,64 @@
     <SUITE FILE_PATH="coverage/texasholdemproject$example.coverage" NAME="example Coverage Results" MODIFIED="1553585396551" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/mypoker-master" />
     <SUITE FILE_PATH="coverage/texasholdemproject$randomplayer.coverage" NAME="randomplayer Coverage Results" MODIFIED="1552641922373" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/mypoker-master" />
     <SUITE FILE_PATH="coverage/texasholdemproject$checkpreflophandstrength.coverage" NAME="checkpreflophandstrength Coverage Results" MODIFIED="1552809564270" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/mypoker-master" />
+    <SUITE FILE_PATH="coverage/texasholdemproject$load_table_test__1_.coverage" NAME="load_table_test (1) Coverage Results" MODIFIED="1555574748434" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/mypoker-master" />
     <SUITE FILE_PATH="coverage/texasholdemproject$ars_table.coverage" NAME="ars_table Coverage Results" MODIFIED="1555177346390" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/mypoker-master/scripts" />
-    <SUITE FILE_PATH="coverage/texasholdemproject$qlearning.coverage" NAME="qlearning Coverage Results" MODIFIED="1555319528113" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/mypoker-master" />
+    <SUITE FILE_PATH="coverage/texasholdemproject$table_vis.coverage" NAME="table_vis Coverage Results" MODIFIED="1555334469060" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/mypoker-master/scripts" />
+    <SUITE FILE_PATH="coverage/texasholdemproject$qlearning.coverage" NAME="qlearning Coverage Results" MODIFIED="1555576596749" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/mypoker-master" />
     <SUITE FILE_PATH="coverage/texasholdemproject$testperf.coverage" NAME="testperf Coverage Results" MODIFIED="1553584562492" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/mypoker-master" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mypoker-master/players/learningplayer.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="343">
+              <caret line="208" column="78" lean-forward="true" selection-start-line="208" selection-start-column="78" selection-end-line="208" selection-end-column="78" />
+              <folding>
+                <element signature="e#415#1238#0" />
+                <element signature="e#810#961#0" />
+                <element signature="e#998#1238#0" />
+                <element signature="e#1101#1238#0" />
+                <element signature="e#1362#2223#0" />
+                <element signature="e#1666#1736#0" />
+                <element signature="e#1945#2015#0" />
+                <element signature="e#2663#2831#0" />
+                <element signature="e#2867#3754#0" />
+                <element signature="e#2924#3682#0" />
+                <element signature="e#3002#3682#0" />
+                <element signature="e#3074#3682#0" />
+                <element signature="e#3162#3682#0" />
+                <element signature="e#3288#3682#0" />
+                <element signature="e#3419#3682#0" />
+                <element signature="e#4443#5202#0" />
+                <element signature="e#4798#4930#1" />
+                <element signature="e#5367#6201#0" />
+                <element signature="e#5869#5941#0" />
+                <element signature="e#6002#6068#0" />
+                <element signature="e#6095#6166#0" />
+                <element signature="e#6250#6760#0" />
+                <element signature="e#8332#8664#0" />
+                <element signature="e#8503#8577#0" />
+                <element signature="e#8586#8618#0" />
+                <element signature="e#8748#8814#0" />
+                <element signature="e#8889#8893#0" />
+                <element signature="e#8967#9347#0" />
+                <element signature="e#9132#9347#0" />
+                <element signature="e#9434#10910#0" />
+                <element signature="e#9434#9447#0" />
+                <element signature="e#10380#10549#0" />
+                <element signature="e#10583#10835#0" />
+                <element signature="e#10933#10956#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mypoker-master/qlearning.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="37" column="39" selection-start-line="37" selection-start-column="39" selection-end-line="37" selection-end-column="39" />
+            <state relative-caret-position="119">
+              <caret line="28" column="63" selection-start-line="28" selection-start-column="63" selection-end-line="28" selection-end-column="63" />
               <folding>
                 <element signature="e#93#153#0" expanded="true" />
               </folding>
@@ -34,25 +85,68 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mypoker-master/players/learningplayer.py">
+        <entry file="file://$PROJECT_DIR$/mypoker-master/load_table_test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="192" column="37" selection-start-line="192" selection-start-column="37" selection-end-line="192" selection-end-column="37" />
+            <state relative-caret-position="68">
+              <caret line="4" column="36" selection-start-line="4" selection-start-column="36" selection-end-line="4" selection-end-column="36" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mypoker-master/scripts/table_vis.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="289">
+              <caret line="17" column="9" selection-start-line="17" selection-start-column="9" selection-end-line="17" selection-end-column="9" />
               <folding>
-                <element signature="e#2909#3445#0" />
-                <element signature="e#3327#3376#0" />
-                <element signature="e#3531#4290#0" />
-                <element signature="e#3886#4018#1" />
-                <element signature="e#4455#5289#0" />
-                <element signature="e#4957#5029#0" />
-                <element signature="e#5090#5156#0" />
-                <element signature="e#5183#5254#0" />
-                <element signature="e#6175#6268#0" />
-                <element signature="e#6331#6381#0" />
-                <element signature="e#6485#6506#0" />
-                <element signature="e#7375#7449#0" />
-                <element signature="e#7458#7490#0" />
-                <element signature="e#9748#9771#0" />
+                <element signature="e#0#31#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mypoker-master/players/confirmloseplayer.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <folding>
+                <element signature="e#0#49#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/mypoker-master/q-table-1200.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="15" column="55" lean-forward="true" selection-start-line="15" selection-start-column="55" selection-end-line="15" selection-end-column="55" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mypoker-master/players/rvplayer.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="435">
+              <caret line="183" column="8" selection-start-line="183" selection-start-column="8" selection-end-line="183" selection-end-column="8" />
+              <folding>
+                <element signature="e#0#49#0" expanded="true" />
+                <element signature="e#1783#2327#0" />
+                <element signature="e#2376#2917#0" />
+                <element signature="e#3004#4418#0" />
+                <element signature="e#3186#3379#0" />
+                <element signature="e#3456#3653#1" />
+                <element signature="e#4584#5418#0" />
+                <element signature="e#5086#5158#0" />
+                <element signature="e#5219#5285#0" />
+                <element signature="e#5312#5383#0" />
+                <element signature="e#5595#6977#0" />
+                <element signature="e#6237#6977#0" />
+                <element signature="e#7043#8188#0" />
+                <element signature="e#7717#7825#0" />
+                <element signature="e#10074#10095#0" />
+                <element signature="e#10784#10858#0" />
               </folding>
             </state>
           </provider>
@@ -61,35 +155,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mypoker-master/q-table-100.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="1" column="51" lean-forward="true" selection-start-line="1" selection-start-column="32" selection-end-line="1" selection-end-column="51" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mypoker-master/q-table-140.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="1" column="31" selection-start-line="1" selection-start-column="31" selection-end-line="1" selection-end-column="49" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mypoker-master/q-table-5.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="1" column="34" selection-start-line="1" selection-start-column="34" selection-end-line="1" selection-end-column="44" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mypoker-master/hs_data/river_2500000_500.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="392">
-              <caret line="17469" column="11" lean-forward="true" selection-start-line="17469" selection-start-column="11" selection-end-line="17469" selection-end-column="11" />
+            <state relative-caret-position="595">
+              <caret line="35" column="40" selection-start-line="35" selection-start-column="40" selection-end-line="35" selection-end-column="40" />
             </state>
           </provider>
         </entry>
@@ -115,6 +182,10 @@
       <find>60138</find>
       <find>fold</find>
       <find>num_rounds_played</find>
+      <find>preflop, 0.32, 2, 3, 0, call5</find>
+      <find>preflop, 0.32, 2, 3, 0, call</find>
+      <find>print</find>
+      <find>.round</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -144,29 +215,34 @@
         <option value="$PROJECT_DIR$/mypoker-master/out.txt" />
         <option value="$PROJECT_DIR$/mypoker-master/confirmloseplayer.py" />
         <option value="$PROJECT_DIR$/mypoker-master/learningplayer.py" />
-        <option value="$PROJECT_DIR$/mypoker-master/players/rvplayer.py" />
         <option value="$PROJECT_DIR$/mypoker-master/players/randomplayer.py" />
         <option value="$PROJECT_DIR$/mypoker-master/scripts/hand_eval_test.py" />
         <option value="$PROJECT_DIR$/mypoker-master/pypokerengine/engine/hand_evaluator.py" />
         <option value="$PROJECT_DIR$/mypoker-master/scripts/ars_table.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/mypoker-master/.gitignore" />
+        <option value="$PROJECT_DIR$/mypoker-master/scripts/table_vis..py" />
+        <option value="$PROJECT_DIR$/mypoker-master/q-table-1200.txt" />
+        <option value="$PROJECT_DIR$/mypoker-master/q-table-100.txt" />
+        <option value="$PROJECT_DIR$/mypoker-master/scripts/table_vis.py" />
+        <option value="$PROJECT_DIR$/mypoker-master/players/rvplayer.py" />
+        <option value="$PROJECT_DIR$/mypoker-master/scripts/load_table_test.py" />
+        <option value="$PROJECT_DIR$/mypoker-master/load_table_test.py" />
         <option value="$PROJECT_DIR$/mypoker-master/players/learningplayer.py" />
         <option value="$PROJECT_DIR$/mypoker-master/qlearning.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="y" value="17" />
-    <option name="width" value="1345" />
-    <option name="height" value="823" />
+    <option name="y" value="11" />
+    <option name="width" value="1079" />
+    <option name="height" value="660" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -179,22 +255,11 @@
               <item name="texasholdemproject" type="462c0819:PsiDirectoryNode" />
               <item name="mypoker-master" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="texasholdemproject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="texasholdemproject" type="462c0819:PsiDirectoryNode" />
-              <item name="mypoker-master" type="462c0819:PsiDirectoryNode" />
-              <item name="hs_data" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="texasholdemproject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="texasholdemproject" type="462c0819:PsiDirectoryNode" />
-              <item name="mypoker-master" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -205,11 +270,12 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\ALYIP\Desktop\Keep\NUS\CS3243\Project\texasholdemproject\mypoker-master\hs_data" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/mypoker-master" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\ALYIP\Desktop\Keep\NUS\CS3243\Project\texasholdemproject\mypoker-master" />
+      <recent name="C:\Users\ALYIP\Desktop\Keep\NUS\CS3243\Project\texasholdemproject\mypoker-master\hs_data" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -225,6 +291,28 @@
     </option>
   </component>
   <component name="RunManager" selected="Python.qlearning">
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <module name="texasholdemproject" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="ars_table" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="texasholdemproject" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -247,44 +335,38 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="checkpreflophandstrength" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="load_table_test (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="texasholdemproject" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/mypoker-master" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/mypoker-master/checkpreflophandstrength.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/mypoker-master/load_table_test.py" />
       <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
       <option name="REDIRECT_INPUT" value="false" />
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="example" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="load_table_test" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="texasholdemproject" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/mypoker-master" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/mypoker-master/scripts" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/mypoker-master/example.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\ALYIP\Desktop\Keep\NUS\CS3243\Project\texasholdemproject\mypoker-master\load_table_test.py" />
       <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
       <option name="REDIRECT_INPUT" value="false" />
@@ -313,7 +395,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="testperf" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="table_vis" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="texasholdemproject" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -321,12 +403,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/mypoker-master" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/mypoker-master/scripts" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/mypoker-master/testperf.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/mypoker-master/scripts/table_vis.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -338,10 +420,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.qlearning" />
+        <item itemvalue="Python.load_table_test (1)" />
+        <item itemvalue="Python.load_table_test" />
+        <item itemvalue="Python.table_vis" />
         <item itemvalue="Python.ars_table" />
-        <item itemvalue="Python.example" />
-        <item itemvalue="Python.testperf" />
-        <item itemvalue="Python.checkpreflophandstrength" />
       </list>
     </recent_temporary>
   </component>
@@ -366,7 +448,10 @@
       <workItem from="1553340516376" duration="1100000" />
       <workItem from="1553573476259" duration="6782000" />
       <workItem from="1555139430486" duration="4728000" />
-      <workItem from="1555208114050" duration="7571000" />
+      <workItem from="1555208114050" duration="16456000" />
+      <workItem from="1555389904245" duration="1308000" />
+      <workItem from="1555422234669" duration="10000" />
+      <workItem from="1555574216361" duration="2678000" />
     </task>
     <task id="LOCAL-00001" summary="Add new basic rv player">
       <created>1552800973400</created>
@@ -379,18 +464,18 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="62641000" />
+    <option name="totallyTimeSpent" value="75522000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="878" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23959732" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15503356" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3297587" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.34986594" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49932885" visible="true" weight="0.3069705" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.43699732" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -398,13 +483,13 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50067115" side_tool="true" weight="0.34986594" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.26541555" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.3297587" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="SciView" order="3" weight="0.32967034" />
+      <window_info anchor="right" id="SciView" order="3" weight="0.74026847" />
       <window_info anchor="right" id="Database" order="4" />
       <window_info anchor="right" x="0" y="0" width="337" height="678" id="Documentation" order="5" side_tool="true" weight="0.3295302" />
     </layout>
@@ -414,7 +499,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3297587" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.34986594" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49932885" visible="true" weight="0.34986594" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.43699732" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -422,13 +507,13 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50067115" side_tool="true" weight="0.34986594" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.26541555" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.3297587" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="SciView" order="3" weight="0.32967034" />
+      <window_info anchor="right" id="SciView" order="3" visible="true" weight="0.22416107" />
       <window_info anchor="right" id="Database" order="4" />
       <window_info anchor="right" x="0" y="0" width="337" height="678" id="Documentation" order="5" side_tool="true" weight="0.3295302" />
     </layout-to-restore>
@@ -459,28 +544,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/mypoker-master/raise_player.py" />
-    <entry file="file://$PROJECT_DIR$/mypoker-master/pypokerengine/engine/player.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1215">
-          <caret line="81" column="71" selection-start-line="81" selection-start-column="71" selection-end-line="81" selection-end-column="71" />
-          <folding>
-            <element signature="e#0#49#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mypoker-master/pypokerengine/api/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mypoker-master/poker_conf.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" selection-start-line="8" selection-end-line="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/local/lib/python3.7/site-packages/pypokerengine/players.py" />
     <entry file="file://$PROJECT_DIR$/mypoker-master/pypokerengine/engine/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -604,43 +667,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mypoker-master/hs_data/preflop_10000.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1003">
-          <caret line="59" column="23" selection-start-line="59" selection-start-column="23" selection-end-line="59" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mypoker-master/scripts/hand_eval_test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="10" selection-start-column="10" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mypoker-master/players/rvplayer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" selection-start-line="2" selection-end-line="2" selection-end-column="93" />
-          <folding>
-            <element signature="e#1783#2327#0" />
-            <element signature="e#2376#2917#0" />
-            <element signature="e#3004#4418#0" />
-            <element signature="e#3186#3379#0" />
-            <element signature="e#3456#3653#1" />
-            <element signature="e#4584#5418#0" />
-            <element signature="e#5086#5158#0" />
-            <element signature="e#5219#5285#0" />
-            <element signature="e#5312#5383#0" />
-            <element signature="e#5595#6977#0" />
-            <element signature="e#6237#6977#0" />
-            <element signature="e#7043#8188#0" />
-            <element signature="e#7717#7825#0" />
-            <element signature="e#8441#8457#0" />
-            <element signature="e#9141#9185#0" />
-            <element signature="e#10074#10095#0" />
-            <element signature="e#10784#10858#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -665,30 +695,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mypoker-master/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="13" lean-forward="true" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mypoker-master/hs_data/flop_2500000_500.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-86903" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mypoker-master/q-table-5.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="34" selection-start-line="1" selection-start-column="34" selection-end-line="1" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mypoker-master/q-table-100.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="51" lean-forward="true" selection-start-line="1" selection-start-column="32" selection-end-line="1" selection-end-column="51" />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mypoker-master/q-table-140.txt">
@@ -735,43 +744,156 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mypoker-master/hs_data/river_2500000_500.txt">
+    <entry file="file://$PROJECT_DIR$/mypoker-master/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="392">
-          <caret line="17469" column="11" lean-forward="true" selection-start-line="17469" selection-start-column="11" selection-end-line="17469" selection-end-column="11" />
+        <state relative-caret-position="68">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mypoker-master/players/learningplayer.py">
+    <entry file="file://$PROJECT_DIR$/mypoker-master/hs_data/river_2500000_500.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="192" column="37" selection-start-line="192" selection-start-column="37" selection-end-line="192" selection-end-column="37" />
+        <state relative-caret-position="52">
+          <caret line="17431" selection-start-line="17431" selection-end-line="17431" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mypoker-master/q-table-5.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" selection-start-line="6" selection-end-line="6" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mypoker-master/hs_data/preflop_10000.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="426">
+          <caret line="59" column="11" selection-start-line="59" selection-start-column="11" selection-end-line="59" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mypoker-master/q-table-120.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="116" column="51" selection-start-line="116" selection-start-column="51" selection-end-line="116" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mypoker-master/q-table-100.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="595">
+          <caret line="35" column="40" selection-start-line="35" selection-start-column="40" selection-end-line="35" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mypoker-master/players/confirmloseplayer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
           <folding>
-            <element signature="e#2909#3445#0" />
-            <element signature="e#3327#3376#0" />
-            <element signature="e#3531#4290#0" />
-            <element signature="e#3886#4018#1" />
-            <element signature="e#4455#5289#0" />
-            <element signature="e#4957#5029#0" />
-            <element signature="e#5090#5156#0" />
-            <element signature="e#5183#5254#0" />
-            <element signature="e#6175#6268#0" />
-            <element signature="e#6331#6381#0" />
-            <element signature="e#6485#6506#0" />
-            <element signature="e#7375#7449#0" />
-            <element signature="e#7458#7490#0" />
-            <element signature="e#9748#9771#0" />
+            <element signature="e#0#49#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mypoker-master/scripts/table_vis.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="9" selection-start-line="17" selection-start-column="9" selection-end-line="17" selection-end-column="9" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mypoker-master/load_table_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="36" selection-start-line="4" selection-start-column="36" selection-end-line="4" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mypoker-master/players/rvplayer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="183" column="8" selection-start-line="183" selection-start-column="8" selection-end-line="183" selection-end-column="8" />
+          <folding>
+            <element signature="e#0#49#0" expanded="true" />
+            <element signature="e#1783#2327#0" />
+            <element signature="e#2376#2917#0" />
+            <element signature="e#3004#4418#0" />
+            <element signature="e#3186#3379#0" />
+            <element signature="e#3456#3653#1" />
+            <element signature="e#4584#5418#0" />
+            <element signature="e#5086#5158#0" />
+            <element signature="e#5219#5285#0" />
+            <element signature="e#5312#5383#0" />
+            <element signature="e#5595#6977#0" />
+            <element signature="e#6237#6977#0" />
+            <element signature="e#7043#8188#0" />
+            <element signature="e#7717#7825#0" />
+            <element signature="e#10074#10095#0" />
+            <element signature="e#10784#10858#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mypoker-master/qlearning.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="37" column="39" selection-start-line="37" selection-start-column="39" selection-end-line="37" selection-end-column="39" />
+        <state relative-caret-position="119">
+          <caret line="28" column="63" selection-start-line="28" selection-start-column="63" selection-end-line="28" selection-end-column="63" />
           <folding>
             <element signature="e#93#153#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mypoker-master/players/learningplayer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="343">
+          <caret line="208" column="78" lean-forward="true" selection-start-line="208" selection-start-column="78" selection-end-line="208" selection-end-column="78" />
+          <folding>
+            <element signature="e#415#1238#0" />
+            <element signature="e#810#961#0" />
+            <element signature="e#998#1238#0" />
+            <element signature="e#1101#1238#0" />
+            <element signature="e#1362#2223#0" />
+            <element signature="e#1666#1736#0" />
+            <element signature="e#1945#2015#0" />
+            <element signature="e#2663#2831#0" />
+            <element signature="e#2867#3754#0" />
+            <element signature="e#2924#3682#0" />
+            <element signature="e#3002#3682#0" />
+            <element signature="e#3074#3682#0" />
+            <element signature="e#3162#3682#0" />
+            <element signature="e#3288#3682#0" />
+            <element signature="e#3419#3682#0" />
+            <element signature="e#4443#5202#0" />
+            <element signature="e#4798#4930#1" />
+            <element signature="e#5367#6201#0" />
+            <element signature="e#5869#5941#0" />
+            <element signature="e#6002#6068#0" />
+            <element signature="e#6095#6166#0" />
+            <element signature="e#6250#6760#0" />
+            <element signature="e#8332#8664#0" />
+            <element signature="e#8503#8577#0" />
+            <element signature="e#8586#8618#0" />
+            <element signature="e#8748#8814#0" />
+            <element signature="e#8889#8893#0" />
+            <element signature="e#8967#9347#0" />
+            <element signature="e#9132#9347#0" />
+            <element signature="e#9434#10910#0" />
+            <element signature="e#9434#9447#0" />
+            <element signature="e#10380#10549#0" />
+            <element signature="e#10583#10835#0" />
+            <element signature="e#10933#10956#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mypoker-master/q-table-1200.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="55" lean-forward="true" selection-start-line="15" selection-start-column="55" selection-end-line="15" selection-end-column="55" />
         </state>
       </provider>
     </entry>
