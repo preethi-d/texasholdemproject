@@ -16,10 +16,11 @@ import time
 import atexit
 import multiprocessing as mp
 
-NUM_GAMES = 1000
+NUM_GAMES = 100000
 MAX_ROUND = 10000
 DUMP_INTERVAL = 100
 GAME_COUNT = 0
+LOG_LEVEL = 0
 window = {
     'game_count': 0
 }
@@ -32,8 +33,8 @@ def exithandler(player1, player2):
 def init():
     config = setup_config(max_round=MAX_ROUND, initial_stack=10000, small_blind_amount=10)
 
-    player = LearningPlayer()
-    # player.load_qtable_from_file("gen-0-700-fixed.txt")
+    player = LearningPlayer(LOG_LEVEL)
+    player.load_qtable_from_file("gen-2-100.txt")
     player2 = RVPlayer()
     # player2.load_qtable_from_file("gen-0-700-fixed.txt")
     atexit.register(exithandler, player, player2)
@@ -43,22 +44,18 @@ def init():
     total_start_time = time.time()
     total_rounds = 0
 
+    last_unseen = 0
     for i in range(NUM_GAMES):
         start_time = time.time()
-        try:
-            game_result = start_poker(config, verbose=0)
-        except:
-            print("Terminated")
-            # GAME_COUNT += 1
-            print(GAME_COUNT)
-            break
+        game_result = start_poker(config, verbose=LOG_LEVEL)
         window['game_count'] += 1
 
         num_rounds = player.num_rounds_this_game
         total_rounds += num_rounds
         print("Game #{} {} rounds - {}s".format(i + 1, num_rounds, time.time() - start_time))
         print("Unseen hands: {}".format(player.unseen_hands))
-        print("Unseen states: {}".format(player.unseen_states))
+        print("Unseen states: {}".format(player.unseen_states - last_unseen))
+        last_unseen = player.unseen_states
         print("\n".join(list(map(lambda p: "{}: {}".format(p['name'], p['stack']), game_result['players']))))
         print()
         if i > 0 and i % DUMP_INTERVAL == 0:

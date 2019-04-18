@@ -224,8 +224,8 @@ class RVPlayer(BasePokerPlayer):
         for seat in game_info['seats']:
             if seat['uuid'] != self.uuid:
                 self.opp_uuid = seat['uuid']
-        print("my uuid: " + self.uuid)
-        print("opp uuid: " + self.opp_uuid)
+        # print("my uuid: " + self.uuid)
+        # print("opp uuid: " + self.opp_uuid)
 
     def receive_round_start_message(self, round_count, hole_card, seats):
         self.num_rounds_played += 1
