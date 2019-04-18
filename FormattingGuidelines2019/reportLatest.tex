@@ -83,7 +83,7 @@ This paper outlines our design of an AI poker agent for Heads Up Limit Texas Hol
   \item Precomputing the estimated strength of hand ranks, storing them in look-up tables to allow for retrieval in constant time. (Section 3.3)
  \end{itemize}
 
-The following two sections will explain our agent’s strategy within each betting round, namely the pre-flop and post-flop round.
+The following two sections will explain our agent’s strategy within each betting round, namely the pre-flop and post-flop streets.
 \section{Preflop Street}
 
 In order to decide what action the agent would take based only on the limited amount of information it has during the preflop street, we introduce the use of hand strength ($HS$), which is an estimate determined by the probability of winning with the two hole cards currently in the agent’s hand.
@@ -181,7 +181,7 @@ Where
 
 \begin{description}[style=multiline,leftmargin=10mm]
 \item [\emph{EHS}]refers to the current Expected Hand Strength of a given player. More details can be found in Section 3.2.
-\item [\emph{S}]refers to the current Street that the game is in, which is the start of each new round.
+\item [\emph{S}]refers to the current Street of the round.
 \item [\emph{P}]refers to the Pot Size, which is the total amount in the player's bet.
 \item [\emph{\#OR}]refers to the number of Opponent Raises per street.
 \item [\emph{\#SR}]refers to the number of Self Raises per street.
