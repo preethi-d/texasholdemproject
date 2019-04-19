@@ -15,7 +15,7 @@ class RVPlayer(BasePokerPlayer):
 
     def __init__(self, threshold = 0.5):
         super(BasePokerPlayer, self).__init__()
-        f = open("preflop_10000.txt")
+        f = open("hs_data/handstr.txt")
         cards = ["A"] + [str(i) for i in range(2, 10)] + ["T", "J", "Q", "K"]
         # print(cards)
         for i in cards:
@@ -173,16 +173,16 @@ class RVPlayer(BasePokerPlayer):
         # print(winrate)
 
         # all features that will be used in q learning
-        current_street = round_state['street']  # current street
-        opp_num_raises = self.opp_num_raises
-        self_num_raises = self.self_raises
+        # current_street = round_state['street']  # current street
+        # opp_num_raises = self.opp_num_raises
+        # self_num_raises = self.self_raises
         # get hand strength with monte carlo simulation of 100 times
-        hand_str = self.get_hand_strength(hole_card, community_cards, 100)
-        pot_size = round_state['pot']['main']['amount']
-        opp_play_style = self.get_opponent_play_style()
+        # hand_str = self.get_hand_strength(hole_card, community_cards, 100)
+        # pot_size = round_state['pot']['main']['amount']
+        # opp_play_style = self.get_opponent_play_style()
         # get hand potential with monte carlo simulation of 100 x 100 times
-        ppot, npot = self.get_hand_potential(hole_card, community_cards, 30)
-        eff_hand_str = hand_str + (1 - hand_str) * ppot
+        # ppot, npot = self.get_hand_potential(hole_card, community_cards, 30)
+        # eff_hand_str = hand_str + (1 - hand_str) * ppot
 
         # print("current street: " + current_street)
         # print("opp raises: " + str(opp_num_raises))
@@ -203,7 +203,7 @@ class RVPlayer(BasePokerPlayer):
         action = call_action_info["action"]
         after_action_dt = datetime.datetime.now()
 
-        print("Time elapsed in seconds :" + (str)((after_action_dt - before_action_dt).total_seconds()))
+        # print("Time elapsed in seconds :" + (str)((after_action_dt - before_action_dt).total_seconds()))
 
         return action
 
@@ -224,8 +224,8 @@ class RVPlayer(BasePokerPlayer):
         for seat in game_info['seats']:
             if seat['uuid'] != self.uuid:
                 self.opp_uuid = seat['uuid']
-        print("my uuid: " + self.uuid)
-        print("opp uuid: " + self.opp_uuid)
+        # print("my uuid: " + self.uuid)
+        # print("opp uuid: " + self.opp_uuid)
 
     def receive_round_start_message(self, round_count, hole_card, seats):
         self.num_rounds_played += 1
