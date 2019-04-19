@@ -300,8 +300,8 @@ Later, a classification process, introduced by Dinis and Reis~\shortcite{dinis-r
 \subsection{Q-values converging}
 The Q-value refers to the expected reward at every state of the game. As mentioned in the $\epsilon$-Greedy algorithm, at every turn there is a probability of $\epsilon$ that a random action is chosen, else the action with the highest Q-value is chosen. A Q-value that is reliable is one that converges, meaning multiple occurrences of that particular state returned Q-values that did not vary too much from each other. Ideally, we would want to allow the agent to learn until all Q-values converge, which would allow the agent to choose the best action at every state. However, due to the time constraints of the project, our agent did not receive sufficient training and hence has Q-values that do not converge. This means that it is not guaranteed that our agent will always be able to take the best action, due to the inaccuracy of some of the Q-values.
 
-\subsection{Counterfactual Regret Minimization}
-This was another method for
+\subsection{Counterfactual Regret Minimisation}
+Counterfactual Regret Minimisation (CFR) is another reinforcement learning algorithm that we could have used while implementing our poker agent. This is an algorithm that seeks to minimise regret about its decisions at each step of a game. There are two types of regret - positive and negative regret. Negative regret refers to the regret of having taken a particular action in a particular situation. It means the agent would have done better had it not chosen this action in this situation. Positive regret is mechanism by which the agent tracks actions that resulted in a positive outcome. Unlike Q-learning, which remembers the reward received for every action and chooses the action with the highest reward, CFR remembers the regret for every action and favours the action it regretted not having taken previously. However, CFR assumes that a terminal state is eventually reached and performs updates only after this occurs, which is not a requirement for traditional algorithms like Q-learning.
 
 \iffalse
 \section{Hand Potential}
