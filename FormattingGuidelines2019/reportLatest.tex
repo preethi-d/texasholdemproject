@@ -119,7 +119,7 @@ The postflop streets consist of Flop, Turn and River. As compared to preflop str
 
 \subsection{Q-learning}
 
-In Q-learning, we maintain a table of states and actions as input for the agent. Each state has a Q-value that corresponds to each action. An illustration of it can be seen in Table 1.
+In Q-learning, we maintain a table of states and actions as input for the agent. Each state has a Q-value that corresponds to each action. The Q-value signifies the expected reward at that state. An illustration of the Q-learning table can be seen in Table 1.
 
 \begin{table}[h!]
   \begin{center}
@@ -140,7 +140,7 @@ In Q-learning, we maintain a table of states and actions as input for the agent.
     \label{tab:table1}
   \end{center}
 \end{table}
-The reward function is determined based on the pot size at the end of the game, as seen in the formula below:
+The reward function is determined based on the pot size P - the total amount that has been bet so far - at the end of the game, as seen in the formula below:
 \begin{displaymath}
   R_t=
   \left\lbrace
@@ -151,7 +151,6 @@ The reward function is determined based on the pot size at the end of the game, 
   \end{array}
   \right.
 \end{displaymath}
-\noindent Where $P$ is the pot size at the end of the game.
 
 After each training round, the Q-value of each state is obtained by summing up the previous Q-value and the reward function for that round. More formally,
 \begin{displaymath}
@@ -168,7 +167,7 @@ The agent stores the data it discovers for each round in a table, and reinforcem
 
 \subsubsection{$\epsilon$-Greedy Algorithm}
 
-At every turn, with a probability of $\epsilon$, a random action is chosen to be performed, otherwise an action with the best expected reward is chosen.
+At every turn, with a probability of $\epsilon$, a random action is chosen to be performed, otherwise an action with the best expected reward (highest Q-value) is chosen.
 
 The value of $\epsilon$ will slowly decrease as the agent acquires more training. A relatively large initial value ensures that all possible paths will be explored before the agent settles into a sub-optimal pattern. The $i$-th $State$ and possible $Actions$ for the $\epsilon$-Greedy Algorithm is
 \begin{displaymath}
@@ -182,7 +181,7 @@ Where
 \begin{description}[style=multiline,leftmargin=10mm]
 \item [\emph{EHS}]refers to the current Expected Hand Strength of a given player. More details can be found in Section 3.2.
 \item [\emph{S}]refers to the current Street of the round.
-\item [\emph{P}]refers to the Pot Size, which is the total amount in the player's bet.
+\item [\emph{P}]refers to the Pot Size.
 \item [\emph{\#OR}]refers to the number of Opponent Raises per street.
 \item [\emph{\#SR}]refers to the number of Self Raises per street.
 \item [\emph{OPS}]refers to the Opponent Playing Style.
@@ -204,14 +203,14 @@ These groupings help to reduce the complexity and cut down the size of the total
 
 \subsection{Expected Hand Strength}
 
-The Expected Hand Strength, $EHS$, is the probability of the current hand of a given player winning if the game reaches a showdown. It factors in all possible combinations of what the opponent's hand could be and the remaining hidden board cards, and compares each of these hands to the agent's hand, to see which is better. The $EHS$ of the agent's hand is then calculated, by finding the number of times that particular hand turns out to be better than the opponent's. We do this by comparing the number of times which the agent had a better hand, to the total number of comparisons. More formally,
+The Expected Hand Strength, $EHS$, is the probability of the current hand of a given player winning if the game reaches a showdown. It factors in all possible combinations of what the opponent's hand could be and the remaining hidden board cards, and compares each of these hands to the agent's hand, to see which is better. The $EHS$ of the agent's hand is then calculated, by finding the number of times that particular hand turns out to be better than the opponent's. We do this by comparing the number of comparisons in which the agent had a better hand, to the total number of comparisons. More formally,
 \begin{displaymath}
   EHS(h)= \frac{Ahead(h)+\frac{Tied(h)}{2}}{Ahead(h) + Tied(h) + Behind(h)}
 \end{displaymath}
 
 \noindent Where $Ahead$, $Tied$, and $Behind$ functions determine respectively the number of times the player's hand wins, ties or loses the game. The above formula used to derive the $EHS$ was referenced from Teofilo \textit{et al.}~\shortcite{trc:hs}. 
 
-Note that the $EHS$ may be used at any round of the game. However, the time required to compute an accurate EHS exceeds the time constraint of 0.2s set by the project guidelines, as the number of iterations needed to compute it for a single hand at the pre-flop street is very high. This issue is addressed by using the Average Rank Strength technique which is explained in the next section.
+Note that the $EHS$ may be used at any round of the game. However, the time required to compute an accurate EHS exceeds the time constraint of 0.2s set by the project guidelines, as the number of iterations needed to compute it for a single hand at the pre-flop street is very high. This issue is addressed using look-up tables, which is explained in the next section.
 
 \subsection{EHS Look-up Table}
 
@@ -298,9 +297,11 @@ Later, a classification process, introduced by Dinis and Reis~\shortcite{dinis-r
 
 \section{Limitations}
 
-In theory, our method should work. However, due to the lack of time, our agent did not have sufficient training and therefore the Q-values do not converge. This has resulted in the agent unable to take the best decision based on its current state. Currently, our agent
+\subsection{Q-values converging}
+The Q-value refers to the expected reward at every state of the game. As mentioned in the $\epsilon$-Greedy algorithm, at every turn there is a probability of $\epsilon$ that a random action is chosen, else the action with the highest Q-value is chosen. A Q-value that is reliable is one that converges, meaning multiple occurrences of that particular state returned Q-values that did not vary too much from each other. Ideally, we would want to allow the agent to learn until all Q-values converge, which would allow the agent to choose the best action at every state. However, due to the time constraints of the project, our agent did not receive sufficient training and hence has Q-values that do not converge. This means that it is not guaranteed that our agent will always be able to take the best action, due to the inaccuracy of some of the Q-values.
 
-2. A lot of hands mapped to the same EHS, so trying to play the same way is flawed.
+\subsection{Counterfactual Regret Minimization}
+This was another method for
 
 \iffalse
 \section{Hand Potential}
